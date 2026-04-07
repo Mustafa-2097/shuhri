@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shuhri/feature/customer_dashboard/dashboard/widgets/bottom_nav.dart';
 import '../home/views/home_page.dart';
+import '../../profile/view/profile_page.dart';
 
 class CustomerDashboard extends StatefulWidget {
   final int initialIndex;
@@ -17,7 +18,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     HomePage(),
     const SizedBox(),
     const SizedBox(),
-    const SizedBox(),
+    const ProfilePage(),
   ];
 
   @override
