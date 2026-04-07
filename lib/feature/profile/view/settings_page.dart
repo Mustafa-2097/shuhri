@@ -32,11 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
               shape: BoxShape.circle,
               color: Colors.grey.withOpacity(0.1),
             ),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black54,
-              size: 20.sp,
-            ),
+            child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
           ),
         ),
         title: Text(
@@ -76,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onChanged: (v) => setState(() => dailySummary = v),
               ),
               _buildSettingItem(
-                icon: Icons.sync,
+                icon: Icons.bolt,
                 title: 'Auto Optimization',
                 description: 'Automatically reorganize tasks.',
                 value: autoOptimization,
@@ -104,10 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     SizedBox(height: 10.h),
                     Text(
                       'Version 1.0.0-MVP1',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
+                      style: TextStyle(color: Colors.grey, fontSize: 14.sp),
                     ),
                     SizedBox(height: 5.h),
                     Text(
@@ -126,10 +119,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     Text(
                       'Made with ❤️ for productivity enthusiasts.',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12.sp,
-                      ),
+                      style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                     ),
                   ],
                 ),
@@ -176,10 +166,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 if (description.isNotEmpty)
                   Text(
                     description,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.sp,
-                    ),
+                    style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
               ],
             ),

@@ -22,11 +22,7 @@ class EditProfilePage extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey.withOpacity(0.1),
             ),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black54,
-              size: 20.sp,
-            ),
+            child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
           ),
         ),
         title: Text(
@@ -56,14 +52,19 @@ class EditProfilePage extends StatelessWidget {
                         shape: BoxShape.circle,
                       ),
                       child: Center(
-                        child: Text(
-                          'S',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 50.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Image.asset(
+                          'assets/images/profile_placeholder.png',
+                          width: 100.w,
+                          height: 100.w,
                         ),
+                        // child: Text(
+                        //   'S',
+                        //   style: TextStyle(
+                        //     color: Colors.white,
+                        //     fontSize: 50.sp,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
                       ),
                     ),
                     Positioned(
@@ -75,10 +76,7 @@ class EditProfilePage extends StatelessWidget {
                           color: Colors.white,
                           shape: BoxShape.circle,
                           boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 5,
-                            ),
+                            BoxShadow(color: Colors.black12, blurRadius: 5),
                           ],
                         ),
                         child: Icon(
@@ -123,9 +121,9 @@ class EditProfilePage extends StatelessWidget {
                       child: Text(
                         'Cancel',
                         style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500
+                          color: AppColors.textColor,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -144,9 +142,9 @@ class EditProfilePage extends StatelessWidget {
                       child: Text(
                         'Save Changes',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -191,10 +189,7 @@ class EditProfilePage extends StatelessWidget {
                   SizedBox(width: 8.w),
                   Text(
                     label,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.sp,
-                    ),
+                    style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                   ),
                 ],
               ),
@@ -203,7 +198,10 @@ class EditProfilePage extends StatelessWidget {
                 decoration: InputDecoration(
                   isDense: true,
                   border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 24.w),
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 4.h,
+                    horizontal: 24.w,
+                  ),
                 ),
                 style: TextStyle(
                   color: AppColors.textColor,
@@ -218,4 +216,3 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 }
-

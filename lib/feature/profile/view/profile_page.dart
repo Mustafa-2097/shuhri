@@ -44,7 +44,6 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 10.h),
-            // Profile Image (using Stack for the badge)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
