@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../tasks/views/add_task_page.dart';
+import '../../tasks/views/edit_task_page.dart';
+import '../../notifications/views/notification_page.dart';
 import '../controllers/home_controller.dart';
 
 class HomePage extends StatelessWidget {
@@ -69,32 +71,35 @@ class HomePage extends StatelessWidget {
           ),
           Row(
             children: [
-              Stack(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(8.w),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: const Color(0xFFE2E8F0)),
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: const Icon(Icons.notifications_none_rounded, color: Color(0xFF2563EB)),
-                  ),
-                  Positioned(
-                    right: 6,
-                    top: 6,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF2563EB),
-                        shape: BoxShape.circle,
+              GestureDetector(
+                onTap: () => Get.to(() => const NotificationPage()),
+                child: Stack(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(8.w),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: const Color(0xFFE2E8F0)),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
-                      child: Text(
-                        '1',
-                        style: TextStyle(color: Colors.white, fontSize: 8.sp, fontWeight: FontWeight.bold),
+                      child: const Icon(Icons.notifications_none_rounded, color: Color(0xFF2563EB)),
+                    ),
+                    Positioned(
+                      right: 6,
+                      top: 6,
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF2563EB),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Text(
+                          '1',
+                          style: TextStyle(color: Colors.white, fontSize: 8.sp, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(width: 12.w),
               CircleAvatar(
@@ -380,6 +385,10 @@ class HomePage extends StatelessWidget {
                 icon: Icons.edit_outlined,
                 color: const Color(0xFF2563EB),
                 bgColor: const Color(0xFFDBEAFE),
+                onTap: () => Get.bottomSheet(
+                  const EditTaskPage(),
+                  isScrollControlled: true,
+                ),
               ),
               SizedBox(height: 8.h),
               _buildTaskAction(
@@ -394,14 +403,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildTaskAction({required IconData icon, required Color color, required Color bgColor}) {
-    return Container(
-      padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(
-        color: bgColor,
-        shape: BoxShape.circle,
+  Widget _buildTaskAction({required IconData icon, required Color color, required Color bgColor, VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: bgColor,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: color, size: 18),
       ),
-      child: Icon(icon, color: color, size: 18),
     );
   }
 

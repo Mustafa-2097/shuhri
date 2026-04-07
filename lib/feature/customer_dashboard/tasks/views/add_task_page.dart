@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shuhri/core/constant/widgets/primary_button.dart';
 import '../controllers/task_controller.dart';
+import 'widgets/voice_ui.dart';
 
 class AddTaskPage extends StatelessWidget {
   AddTaskPage({super.key});
@@ -248,27 +249,30 @@ class AddTaskPage extends StatelessWidget {
   }
 
   Widget _buildVoiceButton() {
-    return Container(
-      width: double.infinity,
-      height: 56.h,
-      decoration: BoxDecoration(
-        color: const Color(0xFFF6F6F6),
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.mic_none_rounded, color: Color(0xFF0F172A)),
-          SizedBox(width: 8.w),
-          Text(
-            'Add by Voice',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFF0F172A),
+    return GestureDetector(
+      onTap: () => Get.to(() => const VoiceListeningScreen()),
+      child: Container(
+        width: double.infinity,
+        height: 56.h,
+        decoration: BoxDecoration(
+          color: const Color(0xFFF6F6F6),
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.mic_none_rounded, color: Color(0xFF0F172A)),
+            SizedBox(width: 8.w),
+            Text(
+              'Add by Voice',
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF0F172A),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

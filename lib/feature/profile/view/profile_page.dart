@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shuhri/core/constant/app_colors.dart';
+import 'package:shuhri/feature/customer_dashboard/notifications/views/notification_page.dart';
 import 'package:shuhri/feature/profile/view/widgets/profile_list_tile.dart';
 import 'package:shuhri/feature/profile/view/edit_profile_page.dart';
 import 'package:shuhri/feature/profile/view/settings_page.dart';
@@ -118,7 +119,7 @@ class ProfilePage extends StatelessWidget {
                     height: 25.w,
                   ),
                   title: 'Notification',
-                  onTap: () {},
+                  onTap: () => Get.to(() => const NotificationPage()),
                 ),
                 ProfileListTile(
                   icon: Image.asset(
