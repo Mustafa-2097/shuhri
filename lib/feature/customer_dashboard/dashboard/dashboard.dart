@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shuhri/feature/customer_dashboard/ai/views/ai_page.dart';
 import 'package:shuhri/feature/customer_dashboard/dashboard/widgets/bottom_nav.dart';
 import '../home/views/home_page.dart';
 import '../tasks/views/task_list_page.dart';
@@ -19,7 +20,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
   final List<Widget> _screens = [
     HomePage(),
     TaskListPage(),
-    const AIPage(),
+    AIPage(),
     const ProfilePage(),
   ];
 

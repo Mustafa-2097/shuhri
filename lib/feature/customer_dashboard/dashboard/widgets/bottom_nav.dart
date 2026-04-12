@@ -18,9 +18,7 @@ class BottomNavBar extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
-        border: Border(
-          top: BorderSide(color: Color(0xFFF1F5F9), width: 1),
-        ),
+        border: Border(top: BorderSide(color: Color(0xFFF1F5F9), width: 1)),
       ),
       child: SafeArea(
         child: Padding(
@@ -39,10 +37,11 @@ class BottomNavBar extends StatelessWidget {
                 "assets/icons/inventory.png",
                 "assets/icons/inventory_selected.png",
                 'Task',
-              ),_buildNavItem(
+              ),
+              _buildNavItem(
                 2,
-                "assets/icons/event.png",
-                "assets/icons/event_selected.png",
+                "assets/icons/ai.png",
+                "assets/icons/ai_selected.png",
                 'AI',
               ),
               _buildNavItem(
@@ -59,11 +58,11 @@ class BottomNavBar extends StatelessWidget {
   }
 
   Widget _buildNavItem(
-      int index,
-      String outlinedIcon,
-      String filledIcon,
-      String label,
-      ) {
+    int index,
+    String outlinedIcon,
+    String filledIcon,
+    String label,
+  ) {
     bool isSelected = selectedIndex == index;
     return GestureDetector(
       onTap: () => onItemTapped(index),
