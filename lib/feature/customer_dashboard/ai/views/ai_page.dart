@@ -32,10 +32,10 @@ class AIPage extends StatelessWidget {
 
                 SizedBox(height: 24.h),
 
-                // Location Card
+                // Location Card///
                 _buildLocationCard(
                   address: '123 Business Park, Flo...',
-                  time: '2:10 PM',
+                  time: '2:11 PM',
                 ),
               ],
             ),
