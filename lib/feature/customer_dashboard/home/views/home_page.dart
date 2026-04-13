@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shuhri/feature/profile/view/profile_page.dart';
 import '../../tasks/views/add_task_page.dart';
 import '../../tasks/views/edit_task_page.dart';
 import '../../notifications/views/notification_page.dart';
@@ -81,7 +82,10 @@ class HomePage extends StatelessWidget {
                         border: Border.all(color: const Color(0xFFE2E8F0)),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
-                      child: const Icon(Icons.notifications_none_rounded, color: Color(0xFF2563EB)),
+                      child: const Icon(
+                        Icons.notifications_none_rounded,
+                        color: Color(0xFF2563EB),
+                      ),
                     ),
                     Positioned(
                       right: 6,
@@ -94,7 +98,11 @@ class HomePage extends StatelessWidget {
                         ),
                         child: Text(
                           '1',
-                          style: TextStyle(color: Colors.white, fontSize: 8.sp, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 8.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -105,7 +113,13 @@ class HomePage extends StatelessWidget {
               CircleAvatar(
                 radius: 20.r,
                 backgroundColor: const Color(0xFFF1F5F9),
-                child: const Icon(Icons.person, color: Color(0xFF2563EB)), // Placeholder for image
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const ProfilePage()),
+                  child: const Icon(
+                    Icons.person,
+                    color: Color(0xFF2563EB),
+                  ), // Placeholder for image
+                ),
               ),
             ],
           ),
@@ -134,10 +148,7 @@ class HomePage extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
-                '📊',
-                style: TextStyle(fontSize: 18.sp),
-              ),
+              Text('📊', style: TextStyle(fontSize: 18.sp)),
               SizedBox(width: 8.w),
               Text(
                 'Today Overview',
@@ -187,7 +198,9 @@ class HomePage extends StatelessWidget {
               value: 0.7,
               minHeight: 8.h,
               backgroundColor: const Color(0xFFF1F5F9),
-              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0F172A)),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Color(0xFF0F172A),
+              ),
             ),
           ),
         ],
@@ -215,10 +228,7 @@ class HomePage extends StatelessWidget {
           ),
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: const Color(0xFF64748B),
-            ),
+            style: TextStyle(fontSize: 12.sp, color: const Color(0xFF64748B)),
           ),
         ],
       ),
@@ -296,14 +306,18 @@ class HomePage extends StatelessWidget {
                 width: 75.w,
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 decoration: BoxDecoration(
-                  color: isCompleted ? const Color(0xFFF1F5F9) : const Color(0xFFEEF2FF),
+                  color: isCompleted
+                      ? const Color(0xFFF1F5F9)
+                      : const Color(0xFFEEF2FF),
                   borderRadius: BorderRadius.circular(16.r),
                 ),
                 child: Column(
                   children: [
                     Icon(
                       Icons.access_time_filled_rounded,
-                      color: isCompleted ? const Color(0xFF94A3B8) : const Color(0xFF2563EB),
+                      color: isCompleted
+                          ? const Color(0xFF94A3B8)
+                          : const Color(0xFF2563EB),
                       size: 16,
                     ),
                     SizedBox(height: 4.h),
@@ -312,7 +326,9 @@ class HomePage extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
-                        color: isCompleted ? const Color(0xFF94A3B8) : const Color(0xFF312E81),
+                        color: isCompleted
+                            ? const Color(0xFF94A3B8)
+                            : const Color(0xFF312E81),
                       ),
                     ),
                   ],
@@ -328,7 +344,11 @@ class HomePage extends StatelessWidget {
                       color: Color(0xFFEF4444),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.flag, color: Colors.white, size: 12),
+                    child: const Icon(
+                      Icons.flag,
+                      color: Colors.white,
+                      size: 12,
+                    ),
                   ),
                 ),
             ],
@@ -343,13 +363,18 @@ class HomePage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
-                    color: isCompleted ? const Color(0xFF94A3B8) : const Color(0xFF0F172A),
+                    color: isCompleted
+                        ? const Color(0xFF94A3B8)
+                        : const Color(0xFF0F172A),
                     decoration: isCompleted ? TextDecoration.lineThrough : null,
                   ),
                 ),
                 SizedBox(height: 8.h),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 4.h,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFEEF2FF),
                     borderRadius: BorderRadius.circular(20.r),
@@ -357,7 +382,11 @@ class HomePage extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(Icons.access_time_rounded, color: Color(0xFF2563EB), size: 14),
+                      const Icon(
+                        Icons.access_time_rounded,
+                        color: Color(0xFF2563EB),
+                        size: 14,
+                      ),
                       SizedBox(width: 4.w),
                       Text(
                         duration,
@@ -403,15 +432,17 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildTaskAction({required IconData icon, required Color color, required Color bgColor, VoidCallback? onTap}) {
+  Widget _buildTaskAction({
+    required IconData icon,
+    required Color color,
+    required Color bgColor,
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          color: bgColor,
-          shape: BoxShape.circle,
-        ),
+        decoration: BoxDecoration(color: bgColor, shape: BoxShape.circle),
         child: Icon(icon, color: color, size: 18),
       ),
     );

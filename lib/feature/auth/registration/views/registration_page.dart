@@ -12,7 +12,9 @@ import 'pages/registration_otp_page.dart';
 
 class RegistrationPage extends StatelessWidget {
   RegistrationPage({super.key});
-  final RegistrationPageController controller = Get.put(RegistrationPageController());
+  final RegistrationPageController controller = Get.put(
+    RegistrationPageController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,25 @@ class RegistrationPage extends StatelessWidget {
               SizedBox(height: 10.h),
 
               /// Title+SubTitle Text
-              Center(
-                child: Text(
-                  "Create Account",
-                  style: AppTextStyles.title24(context),
+              AppBar(
+                title: Center(
+                  child: Text(
+                    "Create Account",
+                    style: AppTextStyles.title24(context),
+                  ),
                 ),
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+              ),
+              Center(
+                // child: Text(
+                //   "Create Account",
+                //   style: AppTextStyles.title24(context),
+                // ),
               ),
               SizedBox(height: 12.h),
               Center(
