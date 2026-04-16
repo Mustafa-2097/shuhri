@@ -30,7 +30,11 @@ class AIPage extends StatelessWidget {
                       ),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.auto_awesome_rounded, color: Colors.white, size: 22.sp),
+                    child: Icon(
+                      Icons.auto_awesome_rounded,
+                      color: Colors.white,
+                      size: 22.sp,
+                    ),
                   ),
                   SizedBox(width: 12.w),
                   Column(
@@ -189,7 +193,11 @@ class AIPage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () => controller.fetchTasks(),
-                    child: Icon(Icons.refresh_rounded, color: const Color(0xFF2563EB), size: 20.sp),
+                    child: Icon(
+                      Icons.refresh_rounded,
+                      color: const Color(0xFF2563EB),
+                      size: 20.sp,
+                    ),
                   ),
                 ],
               ),
@@ -207,7 +215,10 @@ class AIPage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'No tasks yet. Use voice to add one!',
-                        style: TextStyle(color: const Color(0xFF94A3B8), fontSize: 14.sp),
+                        style: TextStyle(
+                          color: const Color(0xFF94A3B8),
+                          fontSize: 14.sp,
+                        ),
                       ),
                     ),
                   );
@@ -298,8 +309,12 @@ class AIPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w600,
-                    color: task.isCompleted ? const Color(0xFF94A3B8) : const Color(0xFF0F172A),
-                    decoration: task.isCompleted ? TextDecoration.lineThrough : null,
+                    color: task.isCompleted
+                        ? const Color(0xFF94A3B8)
+                        : const Color(0xFF0F172A),
+                    decoration: task.isCompleted
+                        ? TextDecoration.lineThrough
+                        : null,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -307,14 +322,21 @@ class AIPage extends StatelessWidget {
                 SizedBox(height: 3.h),
                 Text(
                   '${task.duration}m · ${task.priority}',
-                  style: TextStyle(fontSize: 12.sp, color: const Color(0xFF94A3B8)),
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: const Color(0xFF94A3B8),
+                  ),
                 ),
               ],
             ),
           ),
           Icon(
-            task.isCompleted ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
-            color: task.isCompleted ? const Color(0xFF22C55E) : const Color(0xFFCBD5E1),
+            task.isCompleted
+                ? Icons.check_circle_rounded
+                : Icons.radio_button_unchecked_rounded,
+            color: task.isCompleted
+                ? const Color(0xFF22C55E)
+                : const Color(0xFFCBD5E1),
             size: 22.sp,
           ),
         ],
