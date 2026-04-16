@@ -22,4 +22,13 @@ class ApiEndpoints {
   static const String taskStats = '$baseUrl/tasks/stats';
   static const String todayOverview = '$baseUrl/tasks/today-overview';
   static const String reoptimizeTasks = '$baseUrl/tasks/reoptimize-my-day';
+
+  /// Settings
+  static const String settings = '$baseUrl/settings';
+
+  /// Notifications
+  static const String notifications = '$baseUrl/notifications';
+  static const String notificationsStream = '$baseUrl/notifications/stream';
+  static const String markAllNotificationsRead = '$baseUrl/notifications/read-all';
+  static String markNotificationRead(String id) => '$baseUrl/notifications/$id/read';
 }

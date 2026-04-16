@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../controllers/notification_controller.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -10,7 +11,7 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  int selectedFilter = 0; // 0 for All, 1 for Unread
+  final NotificationController controller = Get.put(NotificationController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,75 +24,44 @@ class _NotificationPageState extends State<NotificationPage> {
           _buildFilterToggle(),
           SizedBox(height: 24.h),
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              children: [
-                _buildNotificationCard(
-                  icon: Icons.access_time_filled_rounded,
-                  iconColor: const Color(0xFF2563EB),
-                  iconBgColor: const Color(0xFFEEF2FF),
-                  title: 'Task Reminder',
-                  description: 'Client Meeting starts in 30 minutes',
-                  time: '2m ago',
-                  isUnread: true,
-                ),
-                SizedBox(height: 12.h),
-                _buildNotificationCard(
-                  icon: Icons.emoji_events_rounded,
-                  iconColor: const Color(0xFFF59E0B),
-                  iconBgColor: const Color(0xFFFFF7ED),
-                  title: 'Streak Achievement! 🔥',
-                  description: "You've completed tasks 5 days\nin a row! Keep it up!",
-                  time: '1h ago',
-                  isUnread: true,
-                ),
-                SizedBox(height: 12.h),
-                _buildNotificationCard(
-                  icon: Icons.auto_awesome_rounded,
-                  iconColor: const Color(0xFF8B5CF6),
-                  iconBgColor: const Color(0xFFF5F3FF),
-                  title: 'AI Optimization Available',
-                  description: 'Your schedule can be optimized.\nSave 45 minutes today!',
-                  time: '2h ago',
-                  isUnread: true,
-                ),
-                if (selectedFilter == 0) ...[
-                  SizedBox(height: 12.h),
-                  _buildNotificationCard(
-                    icon: Icons.check_circle_rounded,
-                    iconColor: const Color(0xFF22C55E),
-                    iconBgColor: const Color(0xFFDCFCE7),
-                    title: 'Task Completed',
-                    description: 'Great job! You finished\n "Morning Standup"',
-                    time: '3h ago',
-                    isUnread: false,
-                  ),
-                  SizedBox(height: 12.h),
-                  _buildNotificationCard(
-                    icon: Icons.trending_up_rounded,
-                    iconColor: const Color(0xFF6366F1),
-                    iconBgColor: const Color(0xFFEEF2FF),
-                    title: 'Daily Summary Ready',
-                    description: 'Your productivity report for\ntoday is available',
-                    time: '5h ago',
-                    isUnread: false,
-                  ),
-                  SizedBox(height: 12.h),
-                  _buildNotificationCard(
-                    icon: Icons.report_problem_rounded,
-                    iconColor: const Color(0xFFEF4444),
-                    iconBgColor: const Color(0xFFFEF2F2),
-                    title: 'Upcoming High Priority Task',
-                    description: 'Finish presentation slides -\nDue tomorrow',
-                    time: '6h ago',
-                    isUnread: false,
-                  ),
-                ],
-                SizedBox(height: 24.h),
-                _buildClearAllButton(),
-                SizedBox(height: 32.h),
-              ],
-            ),
+            child: Obx(() {
+              if (controller.isLoading.value) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              final list = controller.filteredNotifications;
+              if (list.isEmpty) {
+                return const Center(child: Text("No notifications"));
+              }
+              return ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                itemCount: list.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == list.length) {
+                    return Column(
+                      children: [
+                        SizedBox(height: 24.h),
+                        _buildClearAllButton(),
+                        SizedBox(height: 32.h),
+                      ],
+                    );
+                  }
+                  final item = list[index];
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: _buildNotificationCard(
+                      icon: Icons.notifications_active,
+                      iconColor: const Color(0xFF2563EB),
+                      iconBgColor: const Color(0xFFEEF2FF),
+                      title: item['title']?.toString() ?? 'Notification',
+                      description: item['message']?.toString() ?? item['description']?.toString() ?? '',
+                      time: item['createdAt'] != null ? "Recent" : "Just now",
+                      isUnread: !(item['isRead'] == true),
+                      onTap: () => controller.markAsRead(item['id'] ?? item['_id'] ?? ''),
+                    ),
+                  );
+                },
+              );
+            }),
           ),
         ],
       ),
@@ -129,19 +99,19 @@ class _NotificationPageState extends State<NotificationPage> {
               color: const Color(0xFF0F172A),
             ),
           ),
-          Text(
-            '3 unread',
+          Obx(() => Text(
+            '${controller.unreadCount} unread',
             style: TextStyle(
               fontSize: 12.sp,
               color: const Color(0xFF94A3B8),
               fontWeight: FontWeight.w500,
             ),
-          ),
+          )),
         ],
       ),
       actions: [
         TextButton(
-          onPressed: () {},
+          onPressed: () => controller.markAllAsRead(),
           child: Text(
             'Mark all read',
             style: TextStyle(
@@ -164,23 +134,23 @@ class _NotificationPageState extends State<NotificationPage> {
         color: const Color(0xFFF1F5F9),
         borderRadius: BorderRadius.circular(16.r),
       ),
-      child: Row(
+      child: Obx(() => Row(
         children: [
           Expanded(
-            child: _buildToggleButton('All (8)', 0),
+            child: _buildToggleButton('All (${controller.notificationsList.length})', 0),
           ),
           Expanded(
-            child: _buildToggleButton('Unread (3)', 1),
+            child: _buildToggleButton('Unread (${controller.unreadCount})', 1),
           ),
         ],
-      ),
+      )),
     );
   }
 
   Widget _buildToggleButton(String label, int index) {
-    bool isSelected = selectedFilter == index;
+    bool isSelected = controller.selectedFilter.value == index;
     return GestureDetector(
-      onTap: () => setState(() => selectedFilter = index),
+      onTap: () => controller.selectedFilter.value = index,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 12.h),
         decoration: BoxDecoration(
@@ -218,9 +188,12 @@ class _NotificationPageState extends State<NotificationPage> {
     required String description,
     required String time,
     required bool isUnread,
+    VoidCallback? onTap,
   }) {
-    return Container(
-      decoration: BoxDecoration(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: const Color(0xFFF1F5F9)),
@@ -310,25 +283,29 @@ class _NotificationPageState extends State<NotificationPage> {
           ],
         ),
       ),
+      ),
     );
   }
 
   Widget _buildClearAllButton() {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 16.h),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-      ),
-      child: Center(
-        child: Text(
-          'Clear All Notifications',
-          style: TextStyle(
-            color: const Color(0xFF475569),
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w700,
+    return GestureDetector(
+      onTap: () => controller.markAllAsRead(),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 16.h),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF8FAFC),
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(color: const Color(0xFFF1F5F9)),
+        ),
+        child: Center(
+          child: Text(
+            'Clear All Notifications',
+            style: TextStyle(
+              color: const Color(0xFF475569),
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
       ),

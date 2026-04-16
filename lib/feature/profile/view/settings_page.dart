@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shuhri/core/constant/app_colors.dart';
+import '../controller/settings_controller.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -11,10 +12,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool aiFeatures = true;
-  bool smartReminders = true;
-  bool dailySummary = true;
-  bool autoOptimization = false;
+  final SettingsController controller = Get.put(SettingsController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,34 +48,44 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSettingItem(
-                icon: Icons.auto_awesome,
-                title: 'AI Features',
-                description: '',
-                value: aiFeatures,
-                onChanged: (v) => setState(() => aiFeatures = v),
-              ),
-              _buildSettingItem(
-                icon: Icons.notifications_none,
-                title: 'Smart Reminders',
-                description: 'Get AI powered task reminders.',
-                value: smartReminders,
-                onChanged: (v) => setState(() => smartReminders = v),
-              ),
-              _buildSettingItem(
-                icon: Icons.description_outlined,
-                title: 'Daily Summary',
-                description: 'Receive end-of-day summaries.',
-                value: dailySummary,
-                onChanged: (v) => setState(() => dailySummary = v),
-              ),
-              _buildSettingItem(
-                icon: Icons.bolt,
-                title: 'Auto Optimization',
-                description: 'Automatically reorganize tasks.',
-                value: autoOptimization,
-                onChanged: (v) => setState(() => autoOptimization = v),
-              ),
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildSettingItem(
+                      icon: Icons.auto_awesome,
+                      title: 'AI Features',
+                      description: '',
+                      value: controller.autoOptimizationEnabled.value,
+                      onChanged: controller.toggleAutoOptimization,
+                    ),
+                    _buildSettingItem(
+                      icon: Icons.notifications_none,
+                      title: 'Smart Reminders',
+                      description: 'Get AI powered task reminders.',
+                      value: controller.smartRemindersEnabled.value,
+                      onChanged: controller.toggleSmartReminders,
+                    ),
+                    _buildSettingItem(
+                      icon: Icons.description_outlined,
+                      title: 'Daily Summary',
+                      description: 'Receive end-of-day summaries.',
+                      value: controller.dailySummaryEnabled.value,
+                      onChanged: controller.toggleDailySummary,
+                    ),
+                    _buildSettingItem(
+                      icon: Icons.bolt,
+                      title: 'Auto Optimization',
+                      description: 'Automatically reorganize tasks.',
+                      value: controller.autoOptimizationEnabled.value,
+                      onChanged: controller.toggleAutoOptimization,
+                    ),
+                  ],
+                );
+              }),
               SizedBox(height: 30.h),
               Container(
                 padding: EdgeInsets.all(15.w),
