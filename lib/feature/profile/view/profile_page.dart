@@ -9,12 +9,16 @@ import 'package:shuhri/feature/profile/view/settings_page.dart';
 import 'package:shuhri/feature/profile/view/privacy_policy_page.dart';
 import 'package:shuhri/feature/profile/view/support_center_page.dart';
 import 'package:shuhri/feature/profile/view/widgets/logout_dialog.dart';
+import 'package:shuhri/feature/profile/controller/profile_controller.dart';
+import 'package:shuhri/feature/profile/view/change_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final profileController = Get.put(ProfileController());
+
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
@@ -57,19 +61,26 @@ class ProfilePage extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.amber, width: 2),
                       ),
-                      child: CircleAvatar(
-                        radius: 50.r,
-                        backgroundImage: AssetImage(
-                          'assets/images/profile_placeholder.png',
-                        ), // Example image
-                        backgroundColor: Colors.amber.shade200,
-                      ),
+                      child: Obx(() {
+                        final imgUrl = profileController.profileImage.value;
+                        return CircleAvatar(
+                          radius: 50.r,
+                          backgroundColor: Colors.amber.shade200,
+                          backgroundImage: imgUrl.isNotEmpty
+                              ? NetworkImage(imgUrl)
+                              : const AssetImage('assets/images/profile_placeholder.png')
+                                  as ImageProvider,
+                        );
+                      }),
                     ),
                     Positioned(
                       bottom: 0,
                       right: 0,
                       child: InkWell(
-                        onTap: () => Get.to(() => const EditProfilePage()),
+                        onTap: () async {
+                          await Get.to(() => const EditProfilePage());
+                          profileController.getProfile();
+                        },
                         child: Container(
                           padding: EdgeInsets.all(3.w),
                           decoration: const BoxDecoration(
@@ -82,33 +93,27 @@ class ProfilePage extends StatelessWidget {
                             width: 26.w,
                             height: 25.w,
                           ),
-                          // child: Icon(
-                          //   Icons.edit,
-                          //   color: Colors.white,
-                          //   size: 15.sp,
-                          // ),
                         ),
                       ),
                     ),
-                    // Floating "S" callout
-                    //
                   ],
                 ),
               ],
             ),
             SizedBox(height: 10.h),
-            Text(
-              'MD. AKIB AHAMED',
+            Obx(() => Text(
+              profileController.name.value.isEmpty ? 'MD. AKIB AHAMED' : profileController.name.value,
               style: TextStyle(
                 color: AppColors.textColor,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-            Text(
-              'user@yourdomain.com',
+            )),
+            Obx(() => Text(
+              profileController.email.value.isEmpty ? 'user@yourdomain.com' : profileController.email.value,
               style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-            ),
+            )),
+
             SizedBox(height: 20.h),
             Column(
               children: [
@@ -140,6 +145,16 @@ class ProfilePage extends StatelessWidget {
                   title: 'Setting',
                   onTap: () => Get.to(() => const SettingsPage()),
                 ),
+                ProfileListTile(
+                  icon: Icon(
+                    Icons.lock_outline,
+                    color: AppColors.textColor,
+                    size: 24.sp,
+                  ),
+                  title: 'Change Password',
+                  onTap: () => Get.to(() => const ChangePasswordPage()),
+                ),
+
                 ProfileListTile(
                   icon: Icon(
                     Icons.help_outline,

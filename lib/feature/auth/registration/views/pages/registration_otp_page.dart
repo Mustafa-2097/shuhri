@@ -8,13 +8,16 @@ import '../../../../../core/constant/widgets/auth_app_bar.dart';
 import '../../../../../core/constant/widgets/otpbox.dart';
 import '../../../../../core/constant/widgets/primary_button.dart';
 import '../../../../../core/constant/widgets/success_dialog.dart';
-import '../../../Login/views/login_page.dart';
+import '../../../login/views/login_page.dart';
+import '../../controllers/registration_otp_controller.dart';
 
 class RegistrationOtpPage extends StatelessWidget {
   const RegistrationOtpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(RegistrationOtpController());
+
     return Scaffold(
       appBar: const AuthAppBar(),
       body: SafeArea(
@@ -36,18 +39,18 @@ class RegistrationOtpPage extends StatelessWidget {
               // Custom OTP Box tailored to the UI (4 circles)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: OtpBox(),
+                child: OtpBox(
+                  onChanged: (val) => controller.setOtp(val),
+                ),
               ),
+
               SizedBox(height: 30.h),
 
               PrimaryButton(
                 text: "Continue",
-                onPressed: () => SuccessDialog.show(
-                  subtitle: "Your account is successfully created",
-                  context: context,
-                  onPressed: () => Get.to(() => LoginPage()),
-                ),
+                onPressed: () => controller.verifyEmail(),
               ),
+
               SizedBox(height: 20.h),
 
               RichText(
@@ -62,8 +65,9 @@ class RegistrationOtpPage extends StatelessWidget {
                       ).copyWith(color: AppColors.primaryColor),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          // Handle Resend logic
+                          controller.resendOtp();
                         },
+
                     ),
                   ],
                 ),

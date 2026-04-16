@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shuhri/core/constant/app_colors.dart';
+import '../controller/edit_profile_controller.dart';
+import '../controller/profile_controller.dart';
+
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(EditProfileController());
+
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
@@ -51,38 +56,65 @@ class EditProfilePage extends StatelessWidget {
                         color: AppColors.primaryColor,
                         shape: BoxShape.circle,
                       ),
-                      child: Center(
-                        child: Image.asset(
-                          'assets/images/profile_placeholder.png',
-                          width: 100.w,
-                          height: 100.w,
-                        ),
-                        // child: Text(
-                        //   'S',
-                        //   style: TextStyle(
-                        //     color: Colors.white,
-                        //     fontSize: 50.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
-                      ),
+                      child: Obx(() {
+                        if (controller.selectedImage.value != null) {
+                          // New image picked from gallery
+                          return ClipOval(
+                            child: Image.file(
+                              controller.selectedImage.value!,
+                              width: 100.w,
+                              height: 100.w,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        }
+                        // Show existing network image if available
+                        final existingUrl = Get.isRegistered<ProfileController>()
+                            ? ProfileController.instance.profileImage.value
+                            : '';
+                        if (existingUrl.isNotEmpty) {
+                          return ClipOval(
+                            child: Image.network(
+                              existingUrl,
+                              width: 100.w,
+                              height: 100.w,
+                              fit: BoxFit.cover,
+                              errorBuilder: (_, __, ___) => Image.asset(
+                                'assets/images/profile_placeholder.png',
+                                width: 100.w,
+                                height: 100.w,
+                              ),
+                            ),
+                          );
+                        }
+                        return ClipOval(
+                          child: Image.asset(
+                            'assets/images/profile_placeholder.png',
+                            width: 100.w,
+                            height: 100.w,
+                          ),
+                        );
+                      }),
                     ),
                     Positioned(
                       bottom: 0,
                       right: 0,
-                      child: Container(
-                        padding: EdgeInsets.all(5.w),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 5),
-                          ],
-                        ),
-                        child: Icon(
-                          Icons.camera_alt,
-                          color: AppColors.primaryColor,
-                          size: 20.sp,
+                      child: GestureDetector(
+                        onTap: () => controller.pickImage(),
+                        child: Container(
+                          padding: EdgeInsets.all(5.w),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(color: Colors.black12, blurRadius: 5),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: AppColors.primaryColor,
+                            size: 20.sp,
+                          ),
                         ),
                       ),
                     ),
@@ -93,15 +125,16 @@ class EditProfilePage extends StatelessWidget {
               // Name text field
               _buildEditTextField(
                 label: 'Full Name',
-                initialValue: 'Shuhri',
+                controller: controller.nameController,
                 icon: Icons.person_outline,
               ),
               SizedBox(height: 15.h),
               // Email text field
               _buildEditTextField(
                 label: 'Email',
-                initialValue: 'shuhri@example.com',
+                controller: controller.emailController,
                 icon: Icons.mail_outline,
+                readOnly: true,
               ),
               SizedBox(height: 40.h),
               // Buttons
@@ -131,7 +164,7 @@ class EditProfilePage extends StatelessWidget {
                   SizedBox(width: 15.w),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => controller.updateProfile(),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primaryColor,
                         shape: RoundedRectangleBorder(
@@ -160,8 +193,9 @@ class EditProfilePage extends StatelessWidget {
 
   Widget _buildEditTextField({
     required String label,
-    required String initialValue,
+    required TextEditingController controller,
     required IconData icon,
+    bool readOnly = false,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +228,8 @@ class EditProfilePage extends StatelessWidget {
                 ],
               ),
               TextFormField(
-                initialValue: initialValue,
+                controller: controller,
+                readOnly: readOnly,
                 decoration: InputDecoration(
                   isDense: true,
                   border: InputBorder.none,

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shuhri/feature/profile/view/profile_page.dart';
-import '../../tasks/views/add_task_page.dart';
-import '../../tasks/views/edit_task_page.dart';
-import '../../notifications/views/notification_page.dart';
-import '../controllers/home_controller.dart';
+import 'package:shuhri/feature/customer_dashboard/tasks/views/add_task_page.dart';
+import 'package:shuhri/feature/customer_dashboard/tasks/views/edit_task_page.dart';
+import 'package:shuhri/feature/customer_dashboard/notifications/views/notification_page.dart';
+import 'package:shuhri/feature/customer_dashboard/home/controllers/home_controller.dart';
+import 'package:shuhri/feature/customer_dashboard/tasks/controllers/task_controller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  final controller = Get.put(HomeController());
+  final homeController = Get.put(HomeController());
+  final taskController = Get.put(TaskController());
 
   @override
   Widget build(BuildContext context) {
@@ -129,83 +131,90 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildTodayOverview(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF0F172A).withOpacity(0.05),
-            offset: const Offset(0, 4),
-            blurRadius: 12,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text('📊', style: TextStyle(fontSize: 18.sp)),
-              SizedBox(width: 8.w),
-              Text(
-                'Today Overview',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0F172A),
+    return Obx(() {
+      final totalTasks = homeController.todayTasksNumber.value;
+      final remain = homeController.remainingTaskNumber.value;
+      final focusTime = homeController.focusTime.value;
+      final progress = homeController.progress.value;
+
+      return Container(
+        padding: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(color: const Color(0xFFF1F5F9)),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF0F172A).withOpacity(0.05),
+              offset: const Offset(0, 4),
+              blurRadius: 12,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text('📊', style: TextStyle(fontSize: 18.sp)),
+                SizedBox(width: 8.w),
+                Text(
+                  'Today Overview',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF0F172A),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildStatBox('4', 'Tasks'),
-              _buildStatBox('1', 'Remain'),
-              _buildStatBox('2h', 'Focus Time'),
-            ],
-          ),
-          SizedBox(height: 24.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Progress',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: const Color(0xFF64748B),
-                  fontWeight: FontWeight.w500,
+              ],
+            ),
+            SizedBox(height: 20.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildStatBox(totalTasks.toString(), 'Tasks'),
+                _buildStatBox(remain.toString(), 'Remain'),
+                _buildStatBox('${focusTime}h', 'Focus Time'),
+              ],
+            ),
+            SizedBox(height: 24.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Progress',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: const Color(0xFF64748B),
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              Text(
-                '70%',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: const Color(0xFF2563EB),
-                  fontWeight: FontWeight.w600,
+                Text(
+                  '${(progress * 100).toInt()}%',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: const Color(0xFF2563EB),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 8.h),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10.r),
-            child: LinearProgressIndicator(
-              value: 0.7,
-              minHeight: 8.h,
-              backgroundColor: const Color(0xFFF1F5F9),
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                Color(0xFF0F172A),
+              ],
+            ),
+            SizedBox(height: 8.h),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
+              child: LinearProgressIndicator(
+                value: progress,
+                minHeight: 8.h,
+                backgroundColor: const Color(0xFFF1F5F9),
+                valueColor: const AlwaysStoppedAnimation<Color>(
+                  Color(0xFF0F172A),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 
   Widget _buildStatBox(String value, String label) {
@@ -236,202 +245,224 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildReOptimizeButton() {
-    return Container(
-      width: double.infinity,
-      height: 56.h,
-      decoration: BoxDecoration(
-        color: const Color(0xFFEEF2FF),
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.bolt, color: Color(0xFF2563EB), size: 20),
-          SizedBox(width: 8.w),
-          Text(
-            'Re-Optimize My Day',
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF2563EB),
+    return GestureDetector(
+      onTap: () => homeController.reoptimizeMyDay(),
+      child: Container(
+        width: double.infinity,
+        height: 56.h,
+        decoration: BoxDecoration(
+          color: const Color(0xFFEEF2FF),
+          borderRadius: BorderRadius.circular(16.r),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.bolt, color: Color(0xFF2563EB), size: 20),
+            SizedBox(width: 8.w),
+            Text(
+              'Re-Optimize My Day',
+              style: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF2563EB),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildTaskList() {
-    return Column(
-      children: [
-        _buildTaskItem(
-          time: '9:00 AM',
-          title: 'Morning Standup',
-          duration: '30m',
-          isPriority: true,
-          isCompleted: false,
-        ),
-        SizedBox(height: 16.h),
-        _buildTaskItem(
-          time: '10:30 AM',
-          title: 'Design Review',
-          duration: '1h',
-          isPriority: false,
-          isCompleted: true,
-        ),
-      ],
-    );
+    return Obx(() => Column(
+          children: taskController.tasks.asMap().entries.map((entry) {
+            final index = entry.key;
+            final task = entry.value;
+            return Padding(
+              padding: EdgeInsets.only(bottom: 16.h),
+              child: _buildTaskItem(
+                index: index,
+                task: task,
+              ),
+            );
+          }).toList(),
+        ));
   }
 
   Widget _buildTaskItem({
-    required String time,
-    required String title,
-    required String duration,
-    bool isPriority = false,
-    bool isCompleted = false,
+    required int index,
+    required TaskModel task,
   }) {
+    Color priorityColor(String p) {
+      if (p == 'HIGH') return const Color(0xFFEF4444);
+      if (p == 'LOW') return const Color(0xFF22C55E);
+      return const Color(0xFFF59E0B);
+    }
+
     return Container(
-      padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.r),
         border: Border.all(color: const Color(0xFFF1F5F9)),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF0F172A).withOpacity(0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                width: 75.w,
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                decoration: BoxDecoration(
-                  color: isCompleted
-                      ? const Color(0xFFF1F5F9)
-                      : const Color(0xFFEEF2FF),
-                  borderRadius: BorderRadius.circular(16.r),
-                ),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.access_time_filled_rounded,
-                      color: isCompleted
-                          ? const Color(0xFF94A3B8)
-                          : const Color(0xFF2563EB),
-                      size: 16,
-                    ),
-                    SizedBox(height: 4.h),
-                    Text(
-                      time,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: isCompleted
-                            ? const Color(0xFF94A3B8)
-                            : const Color(0xFF312E81),
-                      ),
-                    ),
-                  ],
-                ),
+          // Priority left bar
+          Container(
+            width: 5.w,
+            height: 92.h,
+            decoration: BoxDecoration(
+              color: priorityColor(task.priority),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.r),
+                bottomLeft: Radius.circular(20.r),
               ),
-              if (isPriority)
-                Positioned(
-                  top: -8,
-                  right: -8,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFEF4444),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.flag,
-                      color: Colors.white,
-                      size: 12,
-                    ),
-                  ),
-                ),
-            ],
+            ),
           ),
-          SizedBox(width: 16.w),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: isCompleted
-                        ? const Color(0xFF94A3B8)
-                        : const Color(0xFF0F172A),
-                    decoration: isCompleted ? TextDecoration.lineThrough : null,
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                    vertical: 4.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFEEF2FF),
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.access_time_rounded,
-                        color: Color(0xFF2563EB),
-                        size: 14,
-                      ),
-                      SizedBox(width: 4.w),
-                      Text(
-                        duration,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF2563EB),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              child: Row(
+                children: [
+                  // Time badge
+                  Container(
+                    width: 62.w,
+                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    decoration: BoxDecoration(
+                      color: task.isCompleted
+                          ? const Color(0xFFF1F5F9)
+                          : const Color(0xFFEEF2FF),
+                      borderRadius: BorderRadius.circular(14.r),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.access_time_filled_rounded,
+                          color: task.isCompleted
+                              ? const Color(0xFF94A3B8)
+                              : const Color(0xFF2563EB),
+                          size: 14,
                         ),
+                        SizedBox(height: 4.h),
+                        Text(
+                          task.time,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w700,
+                            color: task.isCompleted
+                                ? const Color(0xFF94A3B8)
+                                : const Color(0xFF312E81),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  // Details
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          task.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w700,
+                            color: task.isCompleted
+                                ? const Color(0xFF94A3B8)
+                                : const Color(0xFF0F172A),
+                            decoration: task.isCompleted
+                                ? TextDecoration.lineThrough
+                                : null,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+                        Row(
+                          children: [
+                            Icon(Icons.calendar_today_rounded,
+                                size: 10, color: const Color(0xFF94A3B8)),
+                            SizedBox(width: 3.w),
+                            Text(
+                              task.formattedDate,
+                              style: TextStyle(
+                                fontSize: 11.sp,
+                                color: const Color(0xFF94A3B8),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 6.h),
+                        Row(
+                          children: [
+                            _buildMiniTag('${task.duration}m', const Color(0xFF2563EB), const Color(0xFFEEF2FF)),
+                            SizedBox(width: 6.w),
+                            _buildMiniTag(task.priority, priorityColor(task.priority), priorityColor(task.priority).withOpacity(0.1)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Actions column
+                  Column(
+                    children: [
+                      _buildTaskAction(
+                        icon: task.isCompleted ? Icons.undo_rounded : Icons.check,
+                        color: const Color(0xFF22C55E),
+                        bgColor: const Color(0xFFDCFCE7),
+                        onTap: () => taskController.toggleTaskCompletion(index),
+                      ),
+                      SizedBox(height: 6.h),
+                      _buildTaskAction(
+                        icon: Icons.edit_outlined,
+                        color: const Color(0xFF2563EB),
+                        bgColor: const Color(0xFFDBEAFE),
+                        onTap: () => Get.bottomSheet(
+                          EditTaskPage(task: task),
+                          isScrollControlled: true,
+                        ),
+                      ),
+                      SizedBox(height: 6.h),
+                      _buildTaskAction(
+                        icon: Icons.delete_outline_rounded,
+                        color: const Color(0xFFEF4444),
+                        bgColor: const Color(0xFFFEE2E2),
+                        onTap: () => taskController.deleteTask(index),
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Column(
-            children: [
-              _buildTaskAction(
-                icon: Icons.check,
-                color: const Color(0xFF22C55E),
-                bgColor: const Color(0xFFDCFCE7),
-              ),
-              SizedBox(height: 8.h),
-              _buildTaskAction(
-                icon: Icons.edit_outlined,
-                color: const Color(0xFF2563EB),
-                bgColor: const Color(0xFFDBEAFE),
-                onTap: () => Get.bottomSheet(
-                  const EditTaskPage(),
-                  isScrollControlled: true,
-                ),
-              ),
-              SizedBox(height: 8.h),
-              _buildTaskAction(
-                icon: Icons.delete_outline_rounded,
-                color: const Color(0xFFEF4444),
-                bgColor: const Color(0xFFFEE2E2),
-              ),
-            ],
           ),
         ],
       ),
     );
   }
 
+  Widget _buildMiniTag(String text, Color color, Color bgColor) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(20.r),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600, color: color),
+      ),
+    );
+  }
   Widget _buildTaskAction({
     required IconData icon,
     required Color color,

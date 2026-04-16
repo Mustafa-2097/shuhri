@@ -180,7 +180,7 @@ class RegistrationPage extends StatelessWidget {
               PrimaryButton(
                 text: "Create An Account",
                 onPressed: () {
-                  Get.to(() => const RegistrationOtpPage());
+                  controller.register();
                 },
               ),
               SizedBox(height: 30.h),

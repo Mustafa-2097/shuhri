@@ -137,7 +137,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 32.h),
 
               // Login Button
-              PrimaryButton(text: "Login", onPressed: () => Get.to(() => CustomerDashboard())),
+              PrimaryButton(text: "Login", onPressed: () => controller.login()),
               SizedBox(height: 30.h),
 
               // Don't have an account

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shuhri/core/constant/app_colors.dart';
+import 'package:shuhri/core/network/auth_service.dart';
+
 
 class LogoutDialog extends StatelessWidget {
   const LogoutDialog({super.key});
@@ -68,7 +70,10 @@ class LogoutDialog extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      Get.back(); // close dialog
+                      AuthService.logout();
+                    },
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.r),

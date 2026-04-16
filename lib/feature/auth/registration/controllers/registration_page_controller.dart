@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../../../../core/network/api_endpoints.dart';
+import '../views/pages/registration_otp_page.dart';
+import 'registration_otp_controller.dart';
 
 class RegistrationPageController extends GetxController {
   static RegistrationPageController get instance => Get.find();
@@ -48,27 +53,53 @@ class RegistrationPageController extends GetxController {
   }
 
   /// Registration
-  // Future<void> register() async {
-  //   final nameError = validateName();
-  //   final emailError = validateEmail();
-  //   final passwordError = validatePassword();
-  //   final confirmPasswordError = validateConfirmPassword();
-  //
-  //   final errorMessage =
-  //      nameError ?? emailError ?? passwordError ?? confirmPasswordError;
-  //
-  //   if (errorMessage != null) {
-  //     EasyLoading.showError(errorMessage);
-  //     return;
-  //   }
-  //
-  //   /// REAL SIGNUP
-  //   await AuthService.signUp(
-  //     name: nameController.text,
-  //     email: emailController.text,
-  //     password: passwordController.text,
-  //   );
-  // }
+  Future<void> register() async {
+    final nameError = validateName();
+    final emailError = validateEmail();
+    final passwordError = validatePassword();
+    final confirmPasswordError = validateConfirmPassword();
+
+    final errorMessage =
+       nameError ?? emailError ?? passwordError ?? confirmPasswordError;
+
+    if (errorMessage != null) {
+      EasyLoading.showError(errorMessage);
+      return;
+    }
+
+    if (!agreedToTerms.value) {
+      EasyLoading.showError("You must agree to the terms and conditions");
+      return;
+    }
+
+    try {
+      EasyLoading.show(status: 'Registering...');
+      final response = await http.post(
+        Uri.parse(ApiEndpoints.register),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          "name": nameController.text.trim(),
+          "email": emailController.text.trim(),
+          "password": passwordController.text,
+          "isAcceptedTerms": agreedToTerms.value,
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        EasyLoading.showSuccess('Registration Successful');
+        // Handle successful registration
+        final otpController = Get.put(RegistrationOtpController());
+        otpController.email = emailController.text.trim();
+        Get.to(() => const RegistrationOtpPage());
+      } else {
+        EasyLoading.showError(data['message'] ?? 'Registration failed');
+      }
+    } catch (e) {
+      EasyLoading.showError('An error occurred. Please try again.');
+    }
+  }
 
   @override
   void onClose() {

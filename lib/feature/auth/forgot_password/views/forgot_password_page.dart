@@ -57,7 +57,7 @@ class ForgotPasswordPage extends StatelessWidget {
               SizedBox(height: 30.h),
 
               // Next Button
-              PrimaryButton(text: "Next", onPressed: () => Get.to(() => ResetOtpPage())),
+              PrimaryButton(text: "Next", onPressed: () => controller.sendForgotPassword()),
               SizedBox(height: 30.h),
             ],
           ),

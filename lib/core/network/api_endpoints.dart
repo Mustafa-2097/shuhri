@@ -1,41 +1,25 @@
-// class ApiEndpoints {
-//   /// Base URL
-//   // static const String baseUrl = 'https://anniet.smtsigma.com/api/v1';
-//   static const String baseUrl = 'https://api.dontblowyourlicence.com.au/api/v1';
-//
-//   /// Auth
-//   static const String register = '$baseUrl/auth/register';
-//   static const String verifySigUupOtp = '$baseUrl/auth/verify-otp';
-//   static const String login = '$baseUrl/auth/login';
-//   static const String logout = '$baseUrl/auth/logout';
-//
-//
-//   /// Forgot Password
-//   static const String sendResetOtp = '$baseUrl/auth/send-otp/password-reset';
-//   static const String verifyResetOtp = '$baseUrl/auth/verify-otp/password-reset';
-//   /// Reset password (NEW)
-//   static const String resetPassword = '$baseUrl/auth/reset-password';
-//
-//
-//   /// User / Profile
-//   static const String profile = '$baseUrl/me/profile';
-//   static const String updateProfile = '$baseUrl/me/profile';
-//   static const String updateAvatar = '$baseUrl/me/avatar';
-//   static const String certificate = '$baseUrl/me/certificate';
-//   //
-//   static const String contact = '$baseUrl/me/contact';
-//   static const String educateEmployee = '$baseUrl/me/educate-employee';
-//
-//
-//   /// Courses
-//   static const String courses = '$baseUrl/courses';
-//   static const String nextVideo = '$baseUrl/courses/:id/next-video';
-//
-//   // Lesson's Review
-//   static const String review = '$baseUrl/lessons/:id/review';
-//
-//   // Exam questions
-//   static const String questions = '$baseUrl/lessons/:id/questions';
-//
-// }
-//
+class ApiEndpoints {
+  static const String baseUrl = 'https://05e2-137-59-180-177.ngrok-free.app/api/v1';
+  //static const String baseUrl ='https://05e2-137-59-180-177.ngrok-free.app/api/docs/';
+
+  /// Auth
+  static const String register = '$baseUrl/auth/register';
+  static const String login = '$baseUrl/auth/login';
+  static const String refreshToken = '$baseUrl/auth/refresh-token';
+  static const String forgotPassword = '$baseUrl/auth/forgot-password';
+  static const String verifyOtp = '$baseUrl/auth/verify-otp';
+  static const String resetPassword = '$baseUrl/auth/reset-password';
+  static const String verifyEmail = '$baseUrl/auth/verify-email';
+
+  static const String resendOtp = '$baseUrl/auth/resend-otp';
+  static const String logout = '$baseUrl/auth/logout';
+  static const String me = '$baseUrl/auth/me';
+  static const String changePassword = '$baseUrl/auth/change-password';
+  static const String updateProfile = '$baseUrl/auth/update-profile';
+
+  /// Tasks
+  static const String tasks = '$baseUrl/tasks';
+  static const String taskStats = '$baseUrl/tasks/stats';
+  static const String todayOverview = '$baseUrl/tasks/today-overview';
+  static const String reoptimizeTasks = '$baseUrl/tasks/reoptimize-my-day';
+}

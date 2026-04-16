@@ -8,7 +8,7 @@ import '../../../../../core/constant/widgets/input_text_field.dart';
 import '../../../../../core/constant/widgets/label_text.dart';
 import '../../../../../core/constant/widgets/primary_button.dart';
 import '../../../../../core/constant/widgets/success_dialog.dart';
-import '../../../Login/views/login_page.dart';
+import '../../../login/views/login_page.dart';
 import '../../controllers/reset_password_controller.dart';
 
 class ResetPasswordPage extends StatelessWidget {
@@ -99,11 +99,7 @@ class ResetPasswordPage extends StatelessWidget {
               // Sign Up Button
               PrimaryButton(
                 text: "Next",
-                onPressed: () => SuccessDialog.show(
-                  subtitle: "Your password is successfully reset",
-                  context: context,
-                  onPressed: () => Get.to(() => LoginPage()),
-                ),
+                onPressed: () => controller.resetPassword(),
               ),
               SizedBox(height: 30.h),
             ],

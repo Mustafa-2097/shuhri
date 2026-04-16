@@ -46,8 +46,9 @@ class ResetOtpPage extends StatelessWidget {
 
               PrimaryButton(
                 text: "Continue",
-                onPressed: () => Get.to(() => ResetPasswordPage()),
+                onPressed: () => controller.verifyOtp(),
               ),
+
               SizedBox(height: 20.h),
 
               RichText(
@@ -62,8 +63,9 @@ class ResetOtpPage extends StatelessWidget {
                       ).copyWith(color: AppColors.primaryColor),
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          // Handle Resend logic
+                          controller.resendOtp();
                         },
+
                     ),
                   ],
                 ),

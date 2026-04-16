@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../feature/auth/Login/views/login_page.dart';
+import '../../../feature/auth/login/views/login_page.dart';
 import '../../offline_storage/shared_pref.dart';
 import '../app_colors.dart';
 import '../app_text_styles.dart';

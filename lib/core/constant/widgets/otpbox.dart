@@ -11,7 +11,7 @@ class OtpBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return PinCodeTextField(
       appContext: context,
-      length: 4,
+      length: 6,
       keyboardType: TextInputType.number,
       cursorColor: AppColors.textColor,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,8 +25,8 @@ class OtpBox extends StatelessWidget {
       pinTheme: PinTheme(
         shape: PinCodeFieldShape.circle,
         borderRadius: BorderRadius.circular(10.r),
-        fieldHeight: 65.h,
-        fieldWidth: 60.w,
+        fieldHeight: 45.h,
+        fieldWidth: 45.w,
         borderWidth: 1,
         
         // Background colors
