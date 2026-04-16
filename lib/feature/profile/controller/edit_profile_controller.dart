@@ -48,6 +48,7 @@ class EditProfileController extends GetxController {
 
       var request = http.MultipartRequest('PUT', Uri.parse(ApiEndpoints.updateProfile));
       request.headers['Authorization'] = 'Bearer $token';
+      request.headers['ngrok-skip-browser-warning'] = 'true';
 
       final dataObj = {
         "name": nameController.text.trim(),

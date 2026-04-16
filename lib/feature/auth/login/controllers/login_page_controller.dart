@@ -61,7 +61,10 @@ class LoginPageController extends GetxController {
       EasyLoading.show(status: 'Logging in...');
       final response = await http.post(
         Uri.parse(ApiEndpoints.login),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'ngrok-skip-browser-warning': 'true',
+        },
         body: jsonEncode({
           "email": emailController.text.trim(),
           "password": passwordController.text,

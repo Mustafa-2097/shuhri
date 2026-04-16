@@ -94,8 +94,8 @@ class LoginPage extends StatelessWidget {
                                 !controller.rememberMe.value;
                           },
                           child: Container(
-                            width: 24.w,
-                            height: 24.w,
+                            width: 15.w,
+                            height: 15.w,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
@@ -109,7 +109,7 @@ class LoginPage extends StatelessWidget {
                             child: controller.rememberMe.value
                                 ? Icon(
                                     Icons.check,
-                                    size: 16.sp,
+                                    size: 12.sp,
                                     color: AppColors.whiteColor,
                                   )
                                 : null,
@@ -127,9 +127,9 @@ class LoginPage extends StatelessWidget {
                     onTap: () => Get.to(() => ForgotPasswordPage()),
                     child: Text(
                       "Forgot Password?",
-                      style: AppTextStyles.regular_14(context).copyWith(
-                        color: AppColors.redColor,
-                      ),
+                      style: AppTextStyles.regular_14(
+                        context,
+                      ).copyWith(color: AppColors.redColor),
                     ),
                   ),
                 ],
@@ -149,9 +149,9 @@ class LoginPage extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: "Sign Up",
-                        style: AppTextStyles.bold_16(context).copyWith(
-                          color: AppColors.buttonColor,
-                        ),
+                        style: AppTextStyles.bold_16(
+                          context,
+                        ).copyWith(color: AppColors.buttonColor),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => Get.to(() => RegistrationPage()),
                       ),

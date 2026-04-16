@@ -21,7 +21,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     HomePage(),
     TaskListPage(),
     AIPage(),
-    const ProfilePage(),
+    const ProfilePage(showBackButton: false),
   ];
 
   @override

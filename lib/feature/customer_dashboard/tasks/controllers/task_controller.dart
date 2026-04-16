@@ -100,6 +100,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
       );
       
@@ -136,6 +137,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
       );
       
@@ -161,6 +163,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
       );
       if (response.statusCode == 200) {
@@ -292,6 +295,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
         body: jsonEncode({
           "title": title,
@@ -334,6 +338,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
         body: jsonEncode({
           "title": title,
@@ -368,6 +373,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
       );
 
@@ -394,6 +400,7 @@ class TaskController extends GetxController {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
         },
         body: jsonEncode({"status": status}),
       );

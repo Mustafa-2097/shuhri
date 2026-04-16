@@ -13,7 +13,8 @@ import 'package:shuhri/feature/profile/controller/profile_controller.dart';
 import 'package:shuhri/feature/profile/view/change_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final bool showBackButton;
+  const ProfilePage({super.key, this.showBackButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +26,20 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: Container(
-            padding: EdgeInsets.all(5.w),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey.withOpacity(0.1),
-            ),
-            child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
-          ),
-        ),
+        automaticallyImplyLeading: showBackButton,
+        leading: showBackButton
+            ? IconButton(
+                onPressed: () => Get.back(),
+                icon: Container(
+                  padding: EdgeInsets.all(5.w),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey.withOpacity(0.1),
+                  ),
+                  child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
+                ),
+              )
+            : null,
         title: Text(
           'Profile',
           style: TextStyle(
