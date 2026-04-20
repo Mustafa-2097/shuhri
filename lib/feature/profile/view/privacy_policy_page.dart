@@ -30,7 +30,7 @@ class PrivacyPolicyPage extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Privacy & Policy',
+          'privacy_policy'.tr,
           style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
@@ -43,47 +43,40 @@ class PrivacyPolicyPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Terms',
-              style: TextStyle(
-                color: AppColors.textColor,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.h),
-            Text(
-              _dummyText,
-              style: TextStyle(
-                color: AppColors.textColor.withOpacity(0.7),
-                fontSize: 14.sp,
-                height: 1.5,
-              ),
-            ),
-            SizedBox(height: 20.h),
-            Text(
-              'Changes to the Service and/or Terms:',
-              style: TextStyle(
-                color: AppColors.textColor,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10.h),
-            Text(
-              _dummyText,
-              style: TextStyle(
-                color: AppColors.textColor.withOpacity(0.7),
-                fontSize: 14.sp,
-                height: 1.5,
-              ),
-            ),
+            _buildPolicySection('privacy_data_collection', 'privacy_data_collection_desc'),
+            _buildPolicySection('privacy_ai_processing', 'privacy_ai_processing_desc'),
+            _buildPolicySection('privacy_security', 'privacy_security_desc'),
           ],
         ),
       ),
     );
   }
 
-  static const String _dummyText =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget ornare quam vel facilisis feugiat amet sagittis arcu, tortor. Sapien, consequat ultrices morbi sed. Eu sed et non, leo auctor ut sed. Eu sed et non, leo auctor ut sed. Eget ornare quam vel facilisis feugiat amet sagittis arcu, tortor. Sapien, consequat ultrices morbi sed. Eu sed et non, leo auctor ut sed. Eu sed et non, leo auctor ut sed.';
+  static Widget _buildPolicySection(String titleKey, String contentKey) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 24.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            titleKey.tr,
+            style: TextStyle(
+              color: AppColors.textColor,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10.h),
+          Text(
+            contentKey.tr,
+            style: TextStyle(
+              color: Colors.grey.shade600,
+              fontSize: 14.sp,
+              height: 1.6,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

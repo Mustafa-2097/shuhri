@@ -16,16 +16,16 @@ class _TaskListPageState extends State<TaskListPage> {
   final _searchController = TextEditingController();
 
   String _searchQuery = '';
-  String _selectedFilter = 'All';
+  String _selectedFilter = 'all';
 
   final List<String> _filters = [
-    'All',
-    'Pending',
-    'In-Progress',
-    'Completed',
-    'High Priority',
-    'Medium Priority',
-    'Low Priority',
+    'all',
+    'pending',
+    'in_progress',
+    'completed',
+    'high_priority',
+    'medium_priority',
+    'low_priority',
   ];
 
   @override
@@ -47,26 +47,26 @@ class _TaskListPageState extends State<TaskListPage> {
 
     // Apply filter chip
     switch (_selectedFilter) {
-      case 'Pending':
+      case 'pending':
         tasks = tasks.where((t) => t.status == 'PENDING').toList();
         break;
-      case 'In-Progress':
+      case 'in_progress':
         tasks = tasks.where((t) => t.status == 'IN_PROGRESS').toList();
         break;
-      case 'Completed':
+      case 'completed':
         tasks = tasks.where((t) => t.status == 'COMPLETED').toList();
         break;
-      case 'High Priority':
+      case 'high_priority':
         tasks = tasks.where((t) => t.priority == 'HIGH').toList();
         break;
-      case 'Medium Priority':
+      case 'medium_priority':
         tasks = tasks.where((t) => t.priority == 'MEDIUM').toList();
         break;
-      case 'Low Priority':
+      case 'low_priority':
         tasks = tasks.where((t) => t.priority == 'LOW').toList();
         break;
       default:
-        break; // 'All' — no filter
+        break; // 'all' — no filter
     }
 
     return tasks;
@@ -93,7 +93,7 @@ class _TaskListPageState extends State<TaskListPage> {
                           size: 56.sp, color: const Color(0xFFCBD5E1)),
                       SizedBox(height: 12.h),
                       Text(
-                        'No tasks yet',
+                        'no_tasks'.tr,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
@@ -114,7 +114,7 @@ class _TaskListPageState extends State<TaskListPage> {
                           size: 56.sp, color: const Color(0xFFCBD5E1)),
                       SizedBox(height: 12.h),
                       Text(
-                        'No matching tasks',
+                        'no_matching_tasks'.tr,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
@@ -151,7 +151,7 @@ class _TaskListPageState extends State<TaskListPage> {
       centerTitle: true,
       elevation: 0,
       title: Text(
-        'Tasks List',
+        'tasks_list'.tr,
         style: TextStyle(
           fontSize: 24.sp,
           fontWeight: FontWeight.w800,
@@ -170,7 +170,7 @@ class _TaskListPageState extends State<TaskListPage> {
                     borderRadius: BorderRadius.circular(20.r),
                   ),
                   child: Text(
-                    '${_filteredTasks.length} tasks',
+                    '${_filteredTasks.length} ${'task'.tr}',
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
@@ -207,7 +207,7 @@ class _TaskListPageState extends State<TaskListPage> {
                     controller: _searchController,
                     onChanged: (val) => setState(() => _searchQuery = val),
                     decoration: InputDecoration(
-                      hintText: 'Search tasks by title...',
+                      hintText: 'search_tasks'.tr,
                       hintStyle: TextStyle(
                         color: const Color(0xFF94A3B8),
                         fontSize: 15.sp,
@@ -274,7 +274,7 @@ class _TaskListPageState extends State<TaskListPage> {
               : null,
         ),
         child: Text(
-          label,
+          label.tr,
           style: TextStyle(
             color: isSelected ? Colors.white : const Color(0xFF64748B),
             fontSize: 13.sp,

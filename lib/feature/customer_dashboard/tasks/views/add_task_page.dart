@@ -25,26 +25,26 @@ class _AddTaskPageState extends State<AddTaskPage> {
   int _selectedChip = 1; // 0 = 30m, 1 = 1h, 2 = 2h, -1 = custom
 
   final List<Map<String, dynamic>> _durationChips = [
-    {'label': '30 min', 'minutes': 30},
-    {'label': '1 hour', 'minutes': 60},
-    {'label': '2 hours', 'minutes': 120},
+    {'label': 'thirty_min'.tr, 'minutes': 30},
+    {'label': 'one_hour'.tr, 'minutes': 60},
+    {'label': 'two_hours'.tr, 'minutes': 120},
   ];
 
   final List<Map<String, dynamic>> _priorities = [
     {
-      'label': 'High',
+      'label': 'high_priority'.tr,
       'value': 'HIGH',
       'color': const Color(0xFFEF4444),
       'bg': const Color(0xFFFEE2E2),
     },
     {
-      'label': 'Medium',
+      'label': 'medium_priority'.tr,
       'value': 'MEDIUM',
       'color': const Color(0xFFF59E0B),
       'bg': const Color(0xFFFEF3C7),
     },
     {
-      'label': 'Low',
+      'label': 'low_priority'.tr,
       'value': 'LOW',
       'color': const Color(0xFF22C55E),
       'bg': const Color(0xFFDCFCE7),
@@ -159,21 +159,21 @@ class _AddTaskPageState extends State<AddTaskPage> {
               SizedBox(height: 28.h),
               _buildTextField(
                 controller: _titleController,
-                hintText: 'Enter your task...',
+                hintText: 'enter_title'.tr,
               ),
               SizedBox(height: 14.h),
               _buildTimeField(),
               SizedBox(height: 14.h),
               _buildTextField(
                 controller: _descController,
-                hintText: 'Add a description (optional)...',
+                hintText: 'enter_desc'.tr,
                 maxLines: 3,
               ),
               SizedBox(height: 24.h),
-              _buildSectionTitle('Quick duration'),
+              _buildSectionTitle('quick_duration'.tr),
               SizedBox(height: 4.h),
               Text(
-                'Select a preset or type a custom value in minutes',
+                'duration_desc'.tr,
                 style: TextStyle(
                   fontSize: 11.sp,
                   color: const Color(0xFF94A3B8),
@@ -182,7 +182,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               SizedBox(height: 10.h),
               _buildDurationSection(),
               SizedBox(height: 24.h),
-              _buildSectionTitle('Priority'),
+              _buildSectionTitle('priority'.tr),
               SizedBox(height: 10.h),
               _buildPriorityChips(),
               SizedBox(height: 40.h),
@@ -214,7 +214,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         ),
         SizedBox(width: 16.w),
         Text(
-          'Add Task',
+          'add_task_btn'.tr,
           style: TextStyle(
             fontSize: 28.sp,
             fontWeight: FontWeight.w800,
@@ -340,7 +340,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   onTap: () => setState(() => _selectedChip = -1),
                   decoration: InputDecoration(
-                    hintText: 'Custom duration in minutes...',
+                    hintText: 'custom_duration_hint'.tr,
                     hintStyle: TextStyle(
                       fontSize: 13.sp,
                       color: const Color(0xFF94A3B8),
@@ -357,7 +357,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 ),
               ),
               Text(
-                'min',
+                'min'.tr,
                 style: TextStyle(
                   fontSize: 13.sp,
                   color: _selectedChip == -1
@@ -484,7 +484,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
             const Icon(Icons.mic_none_rounded, color: Color(0xFF0F172A)),
             SizedBox(width: 8.w),
             Text(
-              'Add by Voice',
+              'add_by_voice'.tr,
               style: TextStyle(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
@@ -499,12 +499,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   Widget _buildAddTaskButton() {
     return PrimaryButton(
-      text: "Add Task",
+      text: 'add_task_btn'.tr,
       onPressed: () {
         if (_titleController.text.trim().isEmpty) {
           Get.snackbar(
-            'Empty Task',
-            'Please enter a task name',
+            'empty_task_error'.tr,
+            'task_name_required'.tr,
             snackPosition: SnackPosition.BOTTOM,
           );
           return;
@@ -513,8 +513,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
         final duration = _effectiveDurationMinutes;
         if (duration <= 0) {
           Get.snackbar(
-            'Invalid Duration',
-            'Please enter a valid duration',
+            'invalid_duration_error'.tr,
+            'enter_valid_duration'.tr,
             snackPosition: SnackPosition.BOTTOM,
           );
           return;
@@ -536,7 +536,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   Widget _buildAIFootnote() {
     return Center(
       child: Text(
-        '✨ AI will find the best time for your task',
+        'ai_footnote'.tr,
         style: TextStyle(
           fontSize: 12.sp,
           color: const Color(0xFF94A3B8),

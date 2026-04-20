@@ -1,5 +1,8 @@
 class ApiEndpoints {
-  static const String baseUrl = 'https://05e2-137-59-180-177.ngrok-free.app/api/v1';
+  //static const String baseUrl = 'https://05e2-137-59-180-177.ngrok-free.app/api/v1';
+  static const String baseUrl =
+      'https://0e1b-137-59-180-177.ngrok-free.app/api/v1';
+
   //static const String baseUrl ='https://05e2-137-59-180-177.ngrok-free.app/api/docs/';
 
   /// Auth
@@ -29,6 +32,8 @@ class ApiEndpoints {
   /// Notifications
   static const String notifications = '$baseUrl/notifications';
   static const String notificationsStream = '$baseUrl/notifications/stream';
-  static const String markAllNotificationsRead = '$baseUrl/notifications/read-all';
-  static String markNotificationRead(String id) => '$baseUrl/notifications/$id/read';
+  static const String markAllNotificationsRead =
+      '$baseUrl/notifications/read-all';
+  static String markNotificationRead(String id) =>
+      '$baseUrl/notifications/$id/read';
 }

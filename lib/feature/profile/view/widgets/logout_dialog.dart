@@ -52,7 +52,7 @@ class LogoutDialog extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Text(
-              'Are You Sure?',
+              'are_you_sure'.tr,
               style: TextStyle(
                 color: AppColors.textColor,
                 fontSize: 18.sp,
@@ -61,7 +61,7 @@ class LogoutDialog extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             Text(
-              'Do you want to log out?',
+              'logout_confirm'.tr,
               style: TextStyle(color: Colors.grey, fontSize: 14.sp),
               textAlign: TextAlign.center,
             ),
@@ -82,7 +82,7 @@ class LogoutDialog extends StatelessWidget {
                       side: BorderSide(color: Colors.red.shade300),
                     ),
                     child: Text(
-                      'Log out',
+                      'logout'.tr,
                       style: TextStyle(
                         color: Colors.red,
                         fontSize: 14.sp,
@@ -103,7 +103,7 @@ class LogoutDialog extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                     ),
                     child: Text(
-                      'Cancel',
+                      'cancel'.tr,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 14.sp,

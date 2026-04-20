@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/constant/app_colors.dart';
 
@@ -30,25 +31,25 @@ class BottomNavBar extends StatelessWidget {
                 0,
                 "assets/icons/home.png",
                 "assets/icons/home_selected.png",
-                'Home',
+                'home'.tr,
               ),
               _buildNavItem(
                 1,
                 "assets/icons/inventory.png",
                 "assets/icons/inventory_selected.png",
-                'Task',
+                'task'.tr,
               ),
               _buildNavItem(
                 2,
                 "assets/icons/ai.png",
                 "assets/icons/ai_selected.png",
-                'AI',
+                'ai'.tr,
               ),
               _buildNavItem(
                 3,
                 "assets/icons/profile.png",
                 "assets/icons/profile_selected.png",
-                'Profile',
+                'profile'.tr,
               ),
             ],
           ),

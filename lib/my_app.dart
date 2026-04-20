@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'core/constant/app_colors.dart';
+import 'core/localization/app_translations.dart';
 import 'feature/customer_dashboard/dashboard/dashboard.dart';
 import 'feature/splash/view/splash_screen.dart';
 
@@ -25,7 +26,15 @@ class MyApp extends StatelessWidget {
           data: fixedMediaQuery,
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            builder: EasyLoading.init(),
+            translations: AppTranslations(),
+            locale: const Locale('en', 'US'),
+            fallbackLocale: const Locale('en', 'US'),
+            builder: (context, child) {
+              return Directionality(
+                textDirection: TextDirection.ltr,
+                child: EasyLoading.init()(context, child),
+              );
+            },
             theme: ThemeData.light().copyWith(
               primaryColor: AppColors.primaryColor,
               scaffoldBackgroundColor: AppColors.whiteColor,

@@ -36,12 +36,16 @@ class ProfilePage extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: Colors.grey.withOpacity(0.1),
                   ),
-                  child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black54,
+                    size: 20.sp,
+                  ),
                 ),
               )
             : null,
         title: Text(
-          'Profile',
+          'profile'.tr,
           style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
@@ -72,8 +76,10 @@ class ProfilePage extends StatelessWidget {
                           backgroundColor: Colors.amber.shade200,
                           backgroundImage: imgUrl.isNotEmpty
                               ? NetworkImage(imgUrl)
-                              : const AssetImage('assets/images/profile_placeholder.png')
-                                  as ImageProvider,
+                              : const AssetImage(
+                                      'assets/images/profile_placeholder.png',
+                                    )
+                                    as ImageProvider,
                         );
                       }),
                     ),
@@ -105,18 +111,26 @@ class ProfilePage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10.h),
-            Obx(() => Text(
-              profileController.name.value.isEmpty ? 'MD. AKIB AHAMED' : profileController.name.value,
-              style: TextStyle(
-                color: AppColors.textColor,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
+            Obx(
+              () => Text(
+                profileController.name.value.isEmpty
+                    ? 'MD. AKIB AHAMED'
+                    : profileController.name.value,
+                style: TextStyle(
+                  color: AppColors.textColor,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            )),
-            Obx(() => Text(
-              profileController.email.value.isEmpty ? 'user@yourdomain.com' : profileController.email.value,
-              style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-            )),
+            ),
+            Obx(
+              () => Text(
+                profileController.email.value.isEmpty
+                    ? 'user@yourdomain.com'
+                    : profileController.email.value,
+                style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+              ),
+            ),
 
             SizedBox(height: 20.h),
             Column(
@@ -127,18 +141,71 @@ class ProfilePage extends StatelessWidget {
                     width: 26.w,
                     height: 25.w,
                   ),
-                  title: 'Notification',
+                  title: 'notification'.tr,
                   onTap: () => Get.to(() => const NotificationPage()),
                 ),
-                ProfileListTile(
-                  icon: Image.asset(
-                    'assets/icons/language.png',
-                    width: 26.w,
-                    height: 25.w,
+                PopupMenuButton<String>(
+                  offset: const Offset(1, 45),
+                  color: Colors.white,
+                  surfaceTintColor: Colors.white,
+                  elevation: 4,
+                  constraints: BoxConstraints(
+                    maxWidth: 180.w,
+                    maxHeight: 300.h,
                   ),
-                  title: 'Language',
-                  trailingText: 'English (US)',
-                  onTap: () {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                    side: BorderSide(color: Colors.grey.shade100),
+                  ),
+                  initialValue: profileController.selectedLanguage.value,
+                  onSelected: (String value) {
+                    profileController.updateLanguage(value);
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return profileController.languages.map((String language) {
+                      return PopupMenuItem<String>(
+                        value: language,
+                        height: 50.h,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              profileController.languageFlags[language] ?? '',
+                              style: TextStyle(fontSize: 22.sp),
+                            ),
+                            SizedBox(width: 12.w),
+                            Expanded(
+                              child: Text(
+                                profileController
+                                        .languageNativeNames[language] ??
+                                    language,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: AppColors.textColor,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                                textAlign: TextAlign.right,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList();
+                  },
+                  child: Obx(
+                    () => ProfileListTile(
+                      icon: Image.asset(
+                        'assets/icons/language.png',
+                        width: 26.w,
+                        height: 25.w,
+                      ),
+                      title: 'language'.tr,
+                      trailingText: profileController.selectedLanguage.value
+                          .toLowerCase()
+                          .tr,
+                      trailingIcon: Icons.keyboard_arrow_down,
+                    ),
+                  ),
                 ),
                 ProfileListTile(
                   icon: Icon(
@@ -146,7 +213,7 @@ class ProfilePage extends StatelessWidget {
                     color: AppColors.textColor,
                     size: 24.sp,
                   ),
-                  title: 'Setting',
+                  title: 'setting'.tr,
                   onTap: () => Get.to(() => const SettingsPage()),
                 ),
                 ProfileListTile(
@@ -155,7 +222,7 @@ class ProfilePage extends StatelessWidget {
                     color: AppColors.textColor,
                     size: 24.sp,
                   ),
-                  title: 'Change Password',
+                  title: 'change_password'.tr,
                   onTap: () => Get.to(() => const ChangePasswordPage()),
                 ),
 
@@ -165,7 +232,7 @@ class ProfilePage extends StatelessWidget {
                     color: AppColors.textColor,
                     size: 24.sp,
                   ),
-                  title: 'Support Center',
+                  title: 'support_center'.tr,
                   onTap: () => Get.to(() => const SupportCenterPage()),
                 ),
                 ProfileListTile(
@@ -174,7 +241,7 @@ class ProfilePage extends StatelessWidget {
                     width: 26.w,
                     height: 25.w,
                   ),
-                  title: 'Privacy & Policy',
+                  title: 'privacy_policy'.tr,
                   onTap: () => Get.to(() => const PrivacyPolicyPage()),
                 ),
                 ProfileListTile(
@@ -184,7 +251,7 @@ class ProfilePage extends StatelessWidget {
                     height: 25.w,
                   ),
                   // icon: Icons.logout_outlined,
-                  title: 'Logout',
+                  title: 'logout'.tr,
                   textColor: Colors.red,
                   onTap: () {
                     showDialog(

@@ -30,7 +30,7 @@ class SupportCenterPage extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Support Center',
+          'support_center'.tr,
           style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
@@ -42,18 +42,17 @@ class SupportCenterPage extends StatelessWidget {
         padding: EdgeInsets.all(20.w),
         child: Column(
           children: [
-            _buildFAQItem('Lorem ipsum dolor sit amet'),
-            _buildFAQItem('Lorem ipsum dolor sit amet', isExpanded: true),
-            _buildFAQItem('Lorem ipsum dolor sit amet'),
-            _buildFAQItem('Lorem ipsum dolor sit amet'),
-            _buildFAQItem('Lorem ipsum dolor sit amet'),
+            _buildFAQItem('how_to_add_task', 'how_to_add_task_ans'),
+            _buildFAQItem('ai_optimization', 'ai_optimization_ans'),
+            _buildFAQItem('sync_devices', 'sync_devices_ans'),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFAQItem(String question, {bool isExpanded = false}) {
+  Widget _buildFAQItem(String questionKey, String answerKey,
+      {bool isExpanded = false}) {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
@@ -73,7 +72,7 @@ class SupportCenterPage extends StatelessWidget {
         child: ExpansionTile(
           initiallyExpanded: isExpanded,
           title: Text(
-            question,
+            questionKey.tr,
             style: TextStyle(
               color: isExpanded ? AppColors.primaryColor : AppColors.textColor,
               fontWeight: FontWeight.w500,
@@ -84,7 +83,7 @@ class SupportCenterPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 15.w, right: 15.w, bottom: 15.h),
               child: Text(
-                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.',
+                answerKey.tr,
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 14.sp,

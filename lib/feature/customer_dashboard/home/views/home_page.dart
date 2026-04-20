@@ -56,7 +56,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Good Afternoon',
+                'welcome_back'.tr,
                 style: TextStyle(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w800,
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Text(
-                'Your day is optimized',
+                'ready_for_tasks'.tr,
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: const Color(0xFF64748B),
@@ -159,7 +159,7 @@ class HomePage extends StatelessWidget {
                 Text('📊', style: TextStyle(fontSize: 18.sp)),
                 SizedBox(width: 8.w),
                 Text(
-                  'Today Overview',
+                  'today_overview'.tr,
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w700,
@@ -172,9 +172,9 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildStatBox(totalTasks.toString(), 'Tasks'),
-                _buildStatBox(remain.toString(), 'Remain'),
-                _buildStatBox('${focusTime}h', 'Focus Time'),
+                _buildStatBox(totalTasks.toString(), 'total_tasks'.tr),
+                _buildStatBox(remain.toString(), 'remain'.tr),
+                _buildStatBox('${focusTime}h', 'focus_time'.tr),
               ],
             ),
             SizedBox(height: 24.h),
@@ -182,7 +182,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Progress',
+                  'progress'.tr,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: const Color(0xFF64748B),
@@ -260,7 +260,7 @@ class HomePage extends StatelessWidget {
             const Icon(Icons.bolt, color: Color(0xFF2563EB), size: 20),
             SizedBox(width: 8.w),
             Text(
-              'Re-Optimize My Day',
+              're_optimize'.tr,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -407,7 +407,7 @@ class HomePage extends StatelessWidget {
                           children: [
                             _buildMiniTag('${task.duration}m', const Color(0xFF2563EB), const Color(0xFFEEF2FF)),
                             SizedBox(width: 6.w),
-                            _buildMiniTag(task.priority, priorityColor(task.priority), priorityColor(task.priority).withOpacity(0.1)),
+                            _buildMiniTag(task.priority.toLowerCase().tr, priorityColor(task.priority), priorityColor(task.priority).withOpacity(0.1)),
                           ],
                         ),
                       ],

@@ -41,7 +41,7 @@ class AIPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'AI Voice Assistant',
+                        'smart_plan_ai'.tr,
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.w800,
@@ -49,7 +49,7 @@ class AIPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Add tasks with your voice',
+                        'voice_add_desc'.tr,
                         style: TextStyle(
                           fontSize: 13.sp,
                           color: const Color(0xFF64748B),
@@ -123,7 +123,7 @@ class AIPage extends StatelessWidget {
                       ),
                       SizedBox(height: 20.h),
                       Text(
-                        'Tap to Speak',
+                        'tap_to_speak'.tr,
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.w800,
@@ -132,7 +132,7 @@ class AIPage extends StatelessWidget {
                       ),
                       SizedBox(height: 6.h),
                       Text(
-                        'Tell me what task to add',
+                        'speak_hint'.tr,
                         style: TextStyle(
                           fontSize: 14.sp,
                           color: Colors.white.withOpacity(0.8),
@@ -147,7 +147,7 @@ class AIPage extends StatelessWidget {
 
               // Tips
               Text(
-                'Voice Tips',
+                'voice_tips'.tr,
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w700,
@@ -160,21 +160,21 @@ class AIPage extends StatelessWidget {
                 icon: Icons.lightbulb_outline_rounded,
                 iconColor: const Color(0xFFF59E0B),
                 bgColor: const Color(0xFFFFFBEB),
-                text: 'Say "Remind me to call John at 3 PM"',
+                text: 'tip_1'.tr,
               ),
               SizedBox(height: 10.h),
               _buildTip(
                 icon: Icons.bolt_rounded,
                 iconColor: const Color(0xFF2563EB),
                 bgColor: const Color(0xFFEEF2FF),
-                text: 'Say "Add a high priority meeting task"',
+                text: 'tip_2'.tr,
               ),
               SizedBox(height: 10.h),
               _buildTip(
                 icon: Icons.check_circle_outline_rounded,
                 iconColor: const Color(0xFF22C55E),
                 bgColor: const Color(0xFFDCFCE7),
-                text: 'Speak clearly — AI transcribes instantly',
+                text: 'tip_3'.tr,
               ),
 
               SizedBox(height: 28.h),
@@ -184,7 +184,7 @@ class AIPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Recent Tasks',
+                    'recent_tasks'.tr,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
@@ -214,7 +214,7 @@ class AIPage extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'No tasks yet. Use voice to add one!',
+                        'no_tasks_voice'.tr,
                         style: TextStyle(
                           color: const Color(0xFF94A3B8),
                           fontSize: 14.sp,
@@ -321,7 +321,7 @@ class AIPage extends StatelessWidget {
                 ),
                 SizedBox(height: 3.h),
                 Text(
-                  '${task.duration}m · ${task.priority}',
+                  '${task.duration}m · ${task.priority.toLowerCase().tr}',
                   style: TextStyle(
                     fontSize: 12.sp,
                     color: const Color(0xFF94A3B8),

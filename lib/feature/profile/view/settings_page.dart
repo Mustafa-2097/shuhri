@@ -34,7 +34,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         title: Text(
-          'Settings',
+          'setting'.tr,
           style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
@@ -57,29 +57,29 @@ class _SettingsPageState extends State<SettingsPage> {
                   children: [
                     _buildSettingItem(
                       icon: Icons.auto_awesome,
-                      title: 'AI Features',
+                      title: 'ai_features'.tr,
                       description: '',
                       value: controller.autoOptimizationEnabled.value,
                       onChanged: controller.toggleAutoOptimization,
                     ),
                     _buildSettingItem(
                       icon: Icons.notifications_none,
-                      title: 'Smart Reminders',
-                      description: 'Get AI powered task reminders.',
+                      title: 'smart_reminders'.tr,
+                      description: 'smart_reminders_desc'.tr,
                       value: controller.smartRemindersEnabled.value,
                       onChanged: controller.toggleSmartReminders,
                     ),
                     _buildSettingItem(
                       icon: Icons.description_outlined,
-                      title: 'Daily Summary',
-                      description: 'Receive end-of-day summaries.',
+                      title: 'daily_summary'.tr,
+                      description: 'daily_summary_desc'.tr,
                       value: controller.dailySummaryEnabled.value,
                       onChanged: controller.toggleDailySummary,
                     ),
                     _buildSettingItem(
                       icon: Icons.bolt,
-                      title: 'Auto Optimization',
-                      description: 'Automatically reorganize tasks.',
+                      title: 'auto_optimization'.tr,
+                      description: 'auto_optimization_desc'.tr,
                       value: controller.autoOptimizationEnabled.value,
                       onChanged: controller.toggleAutoOptimization,
                     ),
@@ -98,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'About MyDay AI',
+                      'about_app'.tr,
                       style: TextStyle(
                         color: AppColors.textColor,
                         fontSize: 16.sp,
@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     SizedBox(height: 5.h),
                     Text(
-                      'Your intelligent daily planner, designed for efficiency and powered by AI.',
+                      'app_desc'.tr,
                       style: TextStyle(
                         color: AppColors.textColor,
                         fontSize: 14.sp,
@@ -126,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Column(
                   children: [
                     Text(
-                      'Made with ❤️ for productivity enthusiasts.',
+                      'made_with'.tr,
                       style: TextStyle(color: Colors.grey, fontSize: 12.sp),
                     ),
                   ],

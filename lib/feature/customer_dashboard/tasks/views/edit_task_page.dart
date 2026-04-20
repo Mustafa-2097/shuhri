@@ -68,7 +68,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Edit Task',
+                  'edit_task'.tr,
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w800,
@@ -83,21 +83,21 @@ class _EditTaskPageState extends State<EditTaskPage> {
             ),
             SizedBox(height: 24.h),
             // Task Title
-            _buildLabel('Task Title'),
+            _buildLabel('task_title'.tr),
             SizedBox(height: 8.h),
-            _buildTextField(controller: _titleController, hintText: 'Task title...'),
+            _buildTextField(controller: _titleController, hintText: 'task_title_hint'.tr),
             SizedBox(height: 16.h),
             // Description
-            _buildLabel('Description'),
+            _buildLabel('description'.tr),
             SizedBox(height: 8.h),
             _buildTextField(
               controller: _descController,
-              hintText: 'Add a description (optional)...',
+              hintText: 'description_hint'.tr,
               maxLines: 3,
             ),
             SizedBox(height: 16.h),
             // Priority
-            _buildLabel('Priority'),
+            _buildLabel('priority'.tr),
             SizedBox(height: 8.h),
             _buildDropdown(
               value: _selectedPriority,
@@ -112,7 +112,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
             ),
             SizedBox(height: 16.h),
             // Status
-            _buildLabel('Status'),
+            _buildLabel('status'.tr),
             SizedBox(height: 8.h),
             _buildDropdown(
               value: _selectedStatus,
@@ -140,7 +140,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                 ),
                 icon: const Icon(Icons.sync_rounded, color: Color(0xFF2563EB), size: 20),
                 label: Text(
-                  'Update Status Only',
+                  'update_status_only'.tr,
                   style: TextStyle(
                     color: const Color(0xFF2563EB),
                     fontWeight: FontWeight.w600,
@@ -167,7 +167,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                 ),
                 icon: const Icon(Icons.delete_outline_rounded, color: Color(0xFFEF4444), size: 20),
                 label: Text(
-                  'Delete Task',
+                  'delete_task'.tr,
                   style: TextStyle(
                     color: const Color(0xFFEF4444),
                     fontWeight: FontWeight.w600,
@@ -184,7 +184,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
               child: ElevatedButton(
                 onPressed: () {
                   if (_titleController.text.trim().isEmpty) {
-                    Get.snackbar('Error', 'Task title cannot be empty');
+                    Get.snackbar('error'.tr, 'task_title_empty'.tr);
                     return;
                   }
                   taskController.updateTask(
@@ -211,7 +211,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                     Icon(Icons.save_as_outlined, color: Colors.white, size: 20.sp),
                     SizedBox(width: 8.w),
                     Text(
-                      'Save Changes',
+                      'save_changes'.tr,
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -297,7 +297,7 @@ class _EditTaskPageState extends State<EditTaskPage> {
                   Icon(icon, color: colorMap[item] ?? Colors.grey, size: 16),
                   SizedBox(width: 8.w),
                   Text(
-                    item,
+                    item.toLowerCase().tr,
                     style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,

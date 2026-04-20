@@ -30,7 +30,7 @@ class ChangePasswordPage extends StatelessWidget {
           ),
         ),
         title: Text(
-          'Change Password',
+          'change_password'.tr,
           style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
@@ -43,20 +43,20 @@ class ChangePasswordPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Old Password', style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+            Text('old_password'.tr, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
             SizedBox(height: 8.h),
-            _buildTextField(controller.oldPasswordController, 'Enter old password', true),
+            _buildTextField(controller.oldPasswordController, 'enter_old_password'.tr, true),
             SizedBox(height: 20.h),
-            Text('New Password', style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+            Text('new_password'.tr, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
             SizedBox(height: 8.h),
-            _buildTextField(controller.newPasswordController, 'Enter new password', true),
+            _buildTextField(controller.newPasswordController, 'enter_new_password'.tr, true),
             SizedBox(height: 20.h),
-            Text('Confirm New Password', style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+            Text('confirm_new_password'.tr, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
             SizedBox(height: 8.h),
-            _buildTextField(controller.confirmPasswordController, 'Confirm new password', true),
+            _buildTextField(controller.confirmPasswordController, 'confirm_new_password'.tr, true),
             SizedBox(height: 40.h),
             PrimaryButton(
-              text: 'Update Password',
+              text: 'update_password'.tr,
               onPressed: () => controller.changePassword(),
             ),
           ],

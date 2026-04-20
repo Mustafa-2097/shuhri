@@ -6,7 +6,8 @@ class ProfileListTile extends StatelessWidget {
   final Widget icon;
   final String title;
   final String? trailingText;
-  final VoidCallback onTap;
+  final IconData? trailingIcon;
+  final VoidCallback? onTap;
   final Color? textColor;
 
   const ProfileListTile({
@@ -14,7 +15,8 @@ class ProfileListTile extends StatelessWidget {
     required this.icon,
     required this.title,
     this.trailingText,
-    required this.onTap,
+    this.trailingIcon,
+    this.onTap,
     this.textColor,
   });
 
@@ -47,7 +49,7 @@ class ProfileListTile extends StatelessWidget {
             ),
           SizedBox(width: 8.w),
           Icon(
-            Icons.arrow_forward_ios,
+            trailingIcon ?? Icons.arrow_forward_ios,
             size: 14.sp,
             color: AppColors.subTextColor,
           ),
