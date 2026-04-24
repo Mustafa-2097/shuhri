@@ -13,30 +13,28 @@ class AppLogoStack extends StatelessWidget {
     final double badgeSize = boxSize * .95;
 
     return SizedBox(
-      width: boxSize + badgeSize * 0.5, // extra room so badge isn't clipped
-      height: boxSize + badgeSize * 0.25,
+      width: boxSize,
+      height: boxSize,
       child: Stack(
         clipBehavior: Clip.none,
+        alignment: Alignment.center,
         children: [
           /// ── Calendar icon ─────────────────────────────────────────
-          Positioned(
-            bottom: 0,
-            left: 17,
-            child: Image.asset(
-              ImagePath.splash01,
-              width: boxSize,
-              fit: BoxFit.contain,
-            ),
+          Image.asset(
+            ImagePath.splash01,
+            width: boxSize,
+            height: boxSize,
+            fit: BoxFit.contain,
           ),
 
           /// ── Sparkle / AI badge (top-right) ────────────────────────
           Positioned(
-            top: 0,
-            right: -15,
-
+            top: -boxSize * 0.15,
+            right: -boxSize * 0.25,
             child: Image.asset(
               ImagePath.splash02,
               width: badgeSize,
+              height: badgeSize,
               fit: BoxFit.contain,
             ),
           ),
