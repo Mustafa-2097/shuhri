@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                     _buildReOptimizeButton(),
                     SizedBox(height: 24.h),
                     _buildTaskList(),
-                    SizedBox(height: 100.h), // Space for FAB and bottom nav
+                    SizedBox(height: 100.h),
                   ],
                 ),
               ),
@@ -274,25 +274,21 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildTaskList() {
-    return Obx(() => Column(
-          children: taskController.tasks.asMap().entries.map((entry) {
-            final index = entry.key;
-            final task = entry.value;
-            return Padding(
-              padding: EdgeInsets.only(bottom: 16.h),
-              child: _buildTaskItem(
-                index: index,
-                task: task,
-              ),
-            );
-          }).toList(),
-        ));
+    return Obx(
+      () => Column(
+        children: taskController.tasks.asMap().entries.map((entry) {
+          final index = entry.key;
+          final task = entry.value;
+          return Padding(
+            padding: EdgeInsets.only(bottom: 16.h),
+            child: _buildTaskItem(index: index, task: task),
+          );
+        }).toList(),
+      ),
+    );
   }
 
-  Widget _buildTaskItem({
-    required int index,
-    required TaskModel task,
-  }) {
+  Widget _buildTaskItem({required int index, required TaskModel task}) {
     Color priorityColor(String p) {
       if (p == 'HIGH') return const Color(0xFFEF4444);
       if (p == 'LOW') return const Color(0xFF22C55E);
@@ -390,8 +386,11 @@ class HomePage extends StatelessWidget {
                         SizedBox(height: 4.h),
                         Row(
                           children: [
-                            Icon(Icons.calendar_today_rounded,
-                                size: 10, color: const Color(0xFF94A3B8)),
+                            Icon(
+                              Icons.calendar_today_rounded,
+                              size: 10,
+                              color: const Color(0xFF94A3B8),
+                            ),
                             SizedBox(width: 3.w),
                             Text(
                               task.formattedDate,
@@ -405,9 +404,17 @@ class HomePage extends StatelessWidget {
                         SizedBox(height: 6.h),
                         Row(
                           children: [
-                            _buildMiniTag('${task.duration}m', const Color(0xFF2563EB), const Color(0xFFEEF2FF)),
+                            _buildMiniTag(
+                              '${task.duration}m',
+                              const Color(0xFF2563EB),
+                              const Color(0xFFEEF2FF),
+                            ),
                             SizedBox(width: 6.w),
-                            _buildMiniTag(task.priority.toLowerCase().tr, priorityColor(task.priority), priorityColor(task.priority).withOpacity(0.1)),
+                            _buildMiniTag(
+                              task.priority.toLowerCase().tr,
+                              priorityColor(task.priority),
+                              priorityColor(task.priority).withOpacity(0.1),
+                            ),
                           ],
                         ),
                       ],
@@ -417,7 +424,9 @@ class HomePage extends StatelessWidget {
                   Column(
                     children: [
                       _buildTaskAction(
-                        icon: task.isCompleted ? Icons.undo_rounded : Icons.check,
+                        icon: task.isCompleted
+                            ? Icons.undo_rounded
+                            : Icons.check,
                         color: const Color(0xFF22C55E),
                         bgColor: const Color(0xFFDCFCE7),
                         onTap: () => taskController.toggleTaskCompletion(index),
@@ -459,10 +468,15 @@ class HomePage extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600, color: color),
+        style: TextStyle(
+          fontSize: 11.sp,
+          fontWeight: FontWeight.w600,
+          color: color,
+        ),
       ),
     );
   }
+
   Widget _buildTaskAction({
     required IconData icon,
     required Color color,

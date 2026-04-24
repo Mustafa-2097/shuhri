@@ -27,7 +27,7 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.initialIndex; // set initial tab
+    _selectedIndex = widget.initialIndex;
   }
 
   void _onItemTapped(int index) {

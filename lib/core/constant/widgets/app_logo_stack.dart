@@ -21,7 +21,7 @@ class AppLogoStack extends StatelessWidget {
           /// ── Calendar icon ─────────────────────────────────────────
           Positioned(
             bottom: 0,
-            left: 0,
+            left: 17,
             child: Image.asset(
               ImagePath.splash01,
               width: boxSize,
@@ -32,7 +32,8 @@ class AppLogoStack extends StatelessWidget {
           /// ── Sparkle / AI badge (top-right) ────────────────────────
           Positioned(
             top: 0,
-            right: 0,
+            right: -15,
+
             child: Image.asset(
               ImagePath.splash02,
               width: badgeSize,
