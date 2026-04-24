@@ -129,13 +129,20 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                   //    Examine  the Progress ui
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   Widget _buildTodayOverview(BuildContext context) {
     return Obx(() {
+      // Ensure these are treated as doubles for precise calculation
       final totalTasks = homeController.todayTasksNumber.value;
       final remain = homeController.remainingTaskNumber.value;
       final focusTime = homeController.focusTime.value;
-      final progress = homeController.progress.value;
+
+      // Logic check: if totalTasks is 0, progress should be 0 to avoid NaN errors
+      final double progress = totalTasks > 0
+          ? (totalTasks - remain) / totalTasks
+          : 0.0;
 
       return Container(
         padding: EdgeInsets.all(20.w),
@@ -189,6 +196,7 @@ class HomePage extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+
                 Text(
                   '${(progress * 100).toInt()}%',
                   style: TextStyle(
@@ -207,7 +215,7 @@ class HomePage extends StatelessWidget {
                 minHeight: 8.h,
                 backgroundColor: const Color(0xFFF1F5F9),
                 valueColor: const AlwaysStoppedAnimation<Color>(
-                  Color(0xFF0F172A),
+                  Color(0xFF2563EB),
                 ),
               ),
             ),
@@ -216,6 +224,93 @@ class HomePage extends StatelessWidget {
       );
     });
   }
+
+  // Widget _buildTodayOverview(BuildContext context) {
+  //   return Obx(() {
+  //     final totalTasks = homeController.todayTasksNumber.value;
+  //     final remain = homeController.remainingTaskNumber.value;
+  //     final focusTime = homeController.focusTime.value;
+  //     final progress = homeController.progress.value;
+  //
+  //     return Container(
+  //       padding: EdgeInsets.all(20.w),
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.circular(20.r),
+  //         border: Border.all(color: const Color(0xFFF1F5F9)),
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: const Color(0xFF0F172A).withOpacity(0.05),
+  //             offset: const Offset(0, 4),
+  //             blurRadius: 12,
+  //           ),
+  //         ],
+  //       ),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Row(
+  //             children: [
+  //               Text('📊', style: TextStyle(fontSize: 18.sp)),
+  //               SizedBox(width: 8.w),
+  //               Text(
+  //                 'today_overview'.tr,
+  //                 style: TextStyle(
+  //                   fontSize: 18.sp,
+  //                   fontWeight: FontWeight.w700,
+  //                   color: const Color(0xFF0F172A),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           SizedBox(height: 20.h),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               _buildStatBox(totalTasks.toString(), 'total_tasks'.tr),
+  //               _buildStatBox(remain.toString(), 'remain'.tr),
+  //               _buildStatBox('${focusTime}h', 'focus_time'.tr),
+  //             ],
+  //           ),
+  //           SizedBox(height: 24.h),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //             children: [
+  //               Text(
+  //                 'progress'.tr,
+  //                 style: TextStyle(
+  //                   fontSize: 14.sp,
+  //                   color: const Color(0xFF64748B),
+  //                   fontWeight: FontWeight.w500,
+  //                 ),
+  //               ),
+  //     Text(
+  //                 '${(progress * 1).toInt()}%',
+  //                 style: TextStyle(
+  //                   fontSize: 14.sp,
+  //                   color: const Color(0xFF2563EB),
+  //                   fontWeight: FontWeight.w600,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           SizedBox(height: 8.h),
+  //           ClipRRect(
+  //             borderRadius: BorderRadius.circular(10.r),
+  //             child: LinearProgressIndicator(
+  //               value: progress,
+  //               minHeight: 8.h,
+  //               backgroundColor: const Color(0xFFF1F5F9),
+  //               valueColor: const AlwaysStoppedAnimation<Color>(
+  //                 Color(0xFF0F172A),
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   });
+  // }
 
   Widget _buildStatBox(String value, String label) {
     return Container(
