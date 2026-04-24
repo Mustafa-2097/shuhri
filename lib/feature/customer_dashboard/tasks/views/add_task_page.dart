@@ -32,19 +32,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   final List<Map<String, dynamic>> _priorities = [
     {
-      'label': 'high_priority'.tr,
+      'label': 'high'.tr,
       'value': 'HIGH',
       'color': const Color(0xFFEF4444),
       'bg': const Color(0xFFFEE2E2),
     },
     {
-      'label': 'medium_priority'.tr,
+      'label': 'medium'.tr,
       'value': 'MEDIUM',
       'color': const Color(0xFFF59E0B),
       'bg': const Color(0xFFFEF3C7),
     },
     {
-      'label': 'low_priority'.tr,
+      'label': 'low'.tr,
       'value': 'LOW',
       'color': const Color(0xFF22C55E),
       'bg': const Color(0xFFDCFCE7),
