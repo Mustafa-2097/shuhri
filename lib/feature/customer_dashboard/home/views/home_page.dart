@@ -7,11 +7,13 @@ import 'package:shuhri/feature/customer_dashboard/tasks/views/edit_task_page.dar
 import 'package:shuhri/feature/customer_dashboard/notifications/views/notification_page.dart';
 import 'package:shuhri/feature/customer_dashboard/home/controllers/home_controller.dart';
 import 'package:shuhri/feature/customer_dashboard/tasks/controllers/task_controller.dart';
+import 'package:shuhri/feature/customer_dashboard/notifications/controllers/notification_controller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final homeController = Get.put(HomeController());
   final taskController = Get.put(TaskController());
+  final notificationController = Get.put(NotificationController());
 
   @override
   Widget build(BuildContext context) {
@@ -89,25 +91,29 @@ class HomePage extends StatelessWidget {
                         color: Color(0xFF2563EB),
                       ),
                     ),
-                    // Positioned(
-                    //   right: 6,
-                    //   top: 6,
-                    //   child: Container(
-                    //     padding: const EdgeInsets.all(4),
-                    //     decoration: const BoxDecoration(
-                    //       color: Color(0xFF2563EB),
-                    //       shape: BoxShape.circle,
-                    //     ),
-                    //     child: Text(
-                    //       '1',
-                    //       style: TextStyle(
-                    //         color: Colors.white,
-                    //         fontSize: 8.sp,
-                    //         fontWeight: FontWeight.bold,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    Obx(() {
+                      final count = notificationController.unreadCount;
+                      if (count == 0) return const SizedBox.shrink();
+                      return Positioned(
+                        right: 6,
+                        top: 6,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF2563EB),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            '$count',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 8.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),
@@ -129,8 +135,9 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                   //    Examine  the Progress ui
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //    Examine  the Progress ui
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   Widget _buildTodayOverview(BuildContext context) {
     return Obx(() {

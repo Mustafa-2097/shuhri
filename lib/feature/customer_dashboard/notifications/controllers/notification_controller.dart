@@ -160,4 +160,9 @@ class NotificationController extends GetxController {
       // Error handling
     }
   }
+
+  void clearAllNotifications() {
+    // Clear notifications locally since there isn't a known backend endpoint for it.
+    notificationsList.clear();
+  }
 }

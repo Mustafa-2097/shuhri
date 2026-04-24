@@ -305,7 +305,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Widget _buildClearAllButton() {
     return GestureDetector(
-      onTap: () => controller.markAllAsRead(),
+      onTap: () => controller.clearAllNotifications(),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 16.h),

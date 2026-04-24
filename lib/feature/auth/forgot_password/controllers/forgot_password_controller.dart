@@ -55,7 +55,7 @@ class ForgotPasswordController extends GetxController {
 
   @override
   void onClose() {
-    emailController.dispose();
+    // Deliberately not disposing text controllers to prevent GetX crash
     super.onClose();
   }
 }

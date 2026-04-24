@@ -112,8 +112,9 @@ class LoginPageController extends GetxController {
 
   @override
   void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
+    // Note: Deliberately not disposing text controllers here to avoid
+    // 'TextEditingController used after being disposed' error during GetX route replacements.
+    // The Dart garbage collector will clean them up when the controller is fully dereferenced.
     super.onClose();
   }
 }

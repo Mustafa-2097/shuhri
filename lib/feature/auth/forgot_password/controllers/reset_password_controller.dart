@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../../../core/network/api_endpoints.dart';
+import '../../login/controllers/login_page_controller.dart';
 import '../../login/views/login_page.dart';
 
 class ResetPasswordController extends GetxController {
@@ -58,7 +59,7 @@ class ResetPasswordController extends GetxController {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Password Reset Successfully');
-        // Handle next steps, e.g., navigate to login
+        Get.delete<LoginPageController>(force: true);
         Get.offAll(() => LoginPage());
       } else {
         EasyLoading.showError(data['message'] ?? 'Failed to reset password');
@@ -70,8 +71,7 @@ class ResetPasswordController extends GetxController {
 
   @override
   void onClose() {
-    passwordController.dispose();
-    confirmPasswordController.dispose();
+    // Deliberately not disposing text controllers to prevent GetX crash
     super.onClose();
   }
 }
