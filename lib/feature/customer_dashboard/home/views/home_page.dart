@@ -89,25 +89,25 @@ class HomePage extends StatelessWidget {
                         color: Color(0xFF2563EB),
                       ),
                     ),
-                    Positioned(
-                      right: 6,
-                      top: 6,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF2563EB),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Text(
-                          '1',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 8.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   right: 6,
+                    //   top: 6,
+                    //   child: Container(
+                    //     padding: const EdgeInsets.all(4),
+                    //     decoration: const BoxDecoration(
+                    //       color: Color(0xFF2563EB),
+                    //       shape: BoxShape.circle,
+                    //     ),
+                    //     child: Text(
+                    //       '1',
+                    //       style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontSize: 8.sp,
+                    //         fontWeight: FontWeight.bold,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
