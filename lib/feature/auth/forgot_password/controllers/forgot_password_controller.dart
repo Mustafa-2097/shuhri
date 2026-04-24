@@ -16,7 +16,8 @@ class ForgotPasswordController extends GetxController {
   /// Validation
   String? validateEmail() {
     if (emailController.text.trim().isEmpty) return "Email is required";
-    if (!GetUtils.isEmail(emailController.text.trim())) return "Enter a valid email";
+    if (!GetUtils.isEmail(emailController.text.trim()))
+      return "Enter a valid email";
     return null;
   }
 
@@ -32,9 +33,7 @@ class ForgotPasswordController extends GetxController {
       final response = await http.post(
         Uri.parse(ApiEndpoints.forgotPassword),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          "email": emailController.text.trim()
-        }),
+        body: jsonEncode({"email": emailController.text.trim()}),
       );
 
       final data = jsonDecode(response.body);

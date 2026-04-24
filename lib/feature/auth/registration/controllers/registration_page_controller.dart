@@ -32,7 +32,8 @@ class RegistrationPageController extends GetxController {
     if (emailController.text.trim().isEmpty) return "Email/Phone is required";
     // Optional: Add email/phone regex validation
     final regex = RegExp(r'^((\+?\d{10,15})|([\w\.-]+@[\w\.-]+\.\w{2,}))$');
-    if (!regex.hasMatch(emailController.text.trim())) return "Enter a valid email or phone number";
+    if (!regex.hasMatch(emailController.text.trim()))
+      return "Enter a valid email or phone number";
     return null;
   }
 
@@ -47,8 +48,10 @@ class RegistrationPageController extends GetxController {
   }
 
   String? validateConfirmPassword() {
-    if (confirmPasswordController.text.trim().isEmpty) return "Confirm your password";
-    if (confirmPasswordController.text.trim() != passwordController.text.trim()) return "Passwords do not match";
+    if (confirmPasswordController.text.trim().isEmpty)
+      return "Confirm your password";
+    if (confirmPasswordController.text.trim() != passwordController.text.trim())
+      return "Passwords do not match";
     return null;
   }
 
@@ -60,7 +63,7 @@ class RegistrationPageController extends GetxController {
     final confirmPasswordError = validateConfirmPassword();
 
     final errorMessage =
-       nameError ?? emailError ?? passwordError ?? confirmPasswordError;
+        nameError ?? emailError ?? passwordError ?? confirmPasswordError;
 
     if (errorMessage != null) {
       EasyLoading.showError(errorMessage);
