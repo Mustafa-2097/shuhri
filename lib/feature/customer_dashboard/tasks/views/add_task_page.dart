@@ -416,50 +416,37 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ],
     );
   }
-
   Widget _buildPriorityChips() {
     return Obx(
-      () => Row(
-        children: _priorities.asMap().entries.map((entry) {
-          final p = entry.value;
+          () => Wrap(
+        spacing: 8.w,
+        runSpacing: 10.h,
+        children: _priorities.map((p) {
           final isSelected = controller.selectedPriority.value == p['value'];
           final color = p['color'] as Color;
           final bg = p['bg'] as Color;
-          final isLast = entry.key == _priorities.length - 1;
 
-          return Expanded(
-            child: GestureDetector(
-              onTap: () => controller.selectPriority(p['value'] as String),
-              child: Container(
-                margin: EdgeInsets.only(right: isLast ? 0 : 8.w),
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                decoration: BoxDecoration(
-                  color: isSelected ? bg : Colors.white,
-                  borderRadius: BorderRadius.circular(14.r),
-                  border: Border.all(
-                    color: isSelected ? color : const Color(0xFFE2E8F0),
-                    width: isSelected ? 1.5 : 1,
+          return GestureDetector(
+            onTap: () => controller.selectPriority(p['value'] as String),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+              decoration: BoxDecoration(
+                color: isSelected ? bg : Colors.white,
+                borderRadius: BorderRadius.circular(14.r),
+                border: Border.all(
+                  color: isSelected ? color : const Color(0xFFE2E8F0),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.flag_rounded, color: isSelected ? color : const Color(0xFFCBD5E1), size: 16),
+                  SizedBox(width: 5.w),
+                  Text(
+                    p['label'] as String,
+                    style: TextStyle(fontSize: 13.sp, color: isSelected ? color : const Color(0xFF64748B)),
                   ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.flag_rounded,
-                      color: isSelected ? color : const Color(0xFFCBD5E1),
-                      size: 16,
-                    ),
-                    SizedBox(width: 5.w),
-                    Text(
-                      p['label'] as String,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: isSelected ? color : const Color(0xFF64748B),
-                      ),
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
           );
@@ -467,6 +454,56 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
     );
   }
+  // Widget _buildPriorityChips() {
+  //   return Obx(
+  //     () => Row(
+  //       children: _priorities.asMap().entries.map((entry) {
+  //         final p = entry.value;
+  //         final isSelected = controller.selectedPriority.value == p['value'];
+  //         final color = p['color'] as Color;
+  //         final bg = p['bg'] as Color;
+  //         final isLast = entry.key == _priorities.length - 1;
+  //
+  //         return Expanded(
+  //           child: GestureDetector(
+  //             onTap: () => controller.selectPriority(p['value'] as String),
+  //             child: Container(
+  //               margin: EdgeInsets.only(right: isLast ? 0 : 8.w),
+  //               padding: EdgeInsets.symmetric(vertical: 12.h),
+  //               decoration: BoxDecoration(
+  //                 color: isSelected ? bg : Colors.white,
+  //                 borderRadius: BorderRadius.circular(14.r),
+  //                 border: Border.all(
+  //                   color: isSelected ? color : const Color(0xFFE2E8F0),
+  //                   width: isSelected ? 1.5 : 1,
+  //                 ),
+  //               ),
+  //               child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.center,
+  //                 children: [
+  //                   Icon(
+  //                     Icons.flag_rounded,
+  //                     color: isSelected ? color : const Color(0xFFCBD5E1),
+  //                     size: 16,
+  //                   ),
+  //                   SizedBox(width: 5.w),
+  //                   Text(
+  //                     p['label'] as String,
+  //                     style: TextStyle(
+  //                       fontSize: 13.sp,
+  //                       fontWeight: FontWeight.w600,
+  //                       color: isSelected ? color : const Color(0xFF64748B),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         );
+  //       }).toList(),
+  //     ),
+  //   );
+  // }
 
   Widget _buildVoiceButton() {
     return GestureDetector(
