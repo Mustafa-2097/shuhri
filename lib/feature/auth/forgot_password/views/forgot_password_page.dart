@@ -12,7 +12,7 @@ import '../controllers/forgot_password_controller.dart';
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({super.key});
 
-  final ForgotPasswordController controller = Get.put(ForgotPasswordController());
+  final ForgotPasswordController controller = Get.find<ForgotPasswordController>();
 
   @override
   Widget build(BuildContext context) {

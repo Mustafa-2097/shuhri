@@ -42,7 +42,7 @@ class ForgotPasswordController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('OTP Sent');
         // Handle next steps
-        final otpController = Get.put(ResetOtpController());
+        final otpController = Get.find<ResetOtpController>();
         otpController.email = emailController.text.trim();
         Get.to(() => ResetOtpPage());
       } else {
@@ -55,7 +55,7 @@ class ForgotPasswordController extends GetxController {
 
   @override
   void onClose() {
-    // Deliberately not disposing text controllers to prevent GetX crash
+    emailController.dispose();
     super.onClose();
   }
 }

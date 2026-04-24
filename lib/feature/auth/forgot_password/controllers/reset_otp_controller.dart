@@ -77,7 +77,7 @@ class ResetOtpController extends GetxController {
         // Handle next steps, e.g., move to reset password passing reset token
         final token = data['data'] != null ? data['data']['resetToken'] : data['resetToken'];
         if (token != null) {
-          Get.put(ResetPasswordController()).resetToken = token;
+          Get.find<ResetPasswordController>().resetToken = token;
         }
         Get.to(() => ResetPasswordPage());
       } else {

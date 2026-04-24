@@ -90,7 +90,7 @@ class RegistrationPageController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Registration Successful');
         // Handle successful registration
-        final otpController = Get.put(RegistrationOtpController());
+        final otpController = Get.find<RegistrationOtpController>();
         otpController.email = emailController.text.trim();
         Get.to(() => const RegistrationOtpPage());
       } else {

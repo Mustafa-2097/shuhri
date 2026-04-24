@@ -38,7 +38,8 @@ class LoginPageController extends GetxController {
   /// Validation
   String? validateEmail() {
     if (emailController.text.trim().isEmpty) return "Email is required";
-    if (!GetUtils.isEmail(emailController.text.trim())) return "Enter a valid email";
+    if (!GetUtils.isEmail(emailController.text.trim()))
+      return "Enter a valid email";
     return null;
   }
 
@@ -112,9 +113,8 @@ class LoginPageController extends GetxController {
 
   @override
   void onClose() {
-    // Note: Deliberately not disposing text controllers here to avoid
-    // 'TextEditingController used after being disposed' error during GetX route replacements.
-    // The Dart garbage collector will clean them up when the controller is fully dereferenced.
+    // emailController.dispose();
+    // passwordController.dispose();
     super.onClose();
   }
 }

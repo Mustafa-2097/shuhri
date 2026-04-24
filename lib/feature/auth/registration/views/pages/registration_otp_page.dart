@@ -16,7 +16,7 @@ class RegistrationOtpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RegistrationOtpController());
+    final controller = Get.find<RegistrationOtpController>();
 
     return Scaffold(
       appBar: const AuthAppBar(),

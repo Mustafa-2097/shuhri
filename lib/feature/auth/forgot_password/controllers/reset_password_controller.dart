@@ -30,8 +30,10 @@ class ResetPasswordController extends GetxController {
   }
 
   String? validateConfirmPassword() {
-    if (confirmPasswordController.text.trim().isEmpty) return "Confirm your password";
-    if (confirmPasswordController.text.trim() != passwordController.text.trim()) return "Passwords do not match";
+    if (confirmPasswordController.text.trim().isEmpty)
+      return "Confirm your password";
+    if (confirmPasswordController.text.trim() != passwordController.text.trim())
+      return "Passwords do not match";
     return null;
   }
 
@@ -71,7 +73,8 @@ class ResetPasswordController extends GetxController {
 
   @override
   void onClose() {
-    // Deliberately not disposing text controllers to prevent GetX crash
+    //passwordController.dispose();
+    // confirmPasswordController.dispose();
     super.onClose();
   }
 }

@@ -12,7 +12,7 @@ import '../../controllers/reset_otp_controller.dart';
 
 class ResetOtpPage extends StatelessWidget {
   ResetOtpPage({super.key});
-  final ResetOtpController controller = Get.put(ResetOtpController());
+  final ResetOtpController controller = Get.find<ResetOtpController>();
 
   @override
   Widget build(BuildContext context) {

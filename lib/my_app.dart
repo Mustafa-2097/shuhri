@@ -7,6 +7,7 @@ import 'core/constant/app_colors.dart';
 import 'core/localization/app_translations.dart';
 import 'feature/customer_dashboard/dashboard/dashboard.dart';
 import 'feature/splash/view/splash_screen.dart';
+import 'core/bindings/app_bindings.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         return MediaQuery(
           data: fixedMediaQuery,
           child: GetMaterialApp(
+            initialBinding: AppBindings(),
             debugShowCheckedModeBanner: false,
             translations: AppTranslations(),
             locale: const Locale('en', 'US'),

@@ -12,9 +12,7 @@ import 'pages/registration_otp_page.dart';
 
 class RegistrationPage extends StatelessWidget {
   RegistrationPage({super.key});
-  final RegistrationPageController controller = Get.put(
-    RegistrationPageController(),
-  );
+  final RegistrationPageController controller = Get.find<RegistrationPageController>();
 
   @override
   Widget build(BuildContext context) {
