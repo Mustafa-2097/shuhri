@@ -95,6 +95,7 @@ class TaskController extends GetxController {
   var recognizedText = "".obs;
   var speechEnabled = false.obs;
   var lastError = "".obs;
+  var supportedLocales = <stt.LocaleName>[].obs;
 
   @override
   void onInit() {
@@ -223,6 +224,12 @@ class TaskController extends GetxController {
           isListening.value = false;
         },
       );
+      if (speechEnabled.value) {
+        supportedLocales.value = await _speech.locales();
+        print(
+          'Supported speech locales: ${supportedLocales.map((l) => l.localeId).toList()}',
+        );
+      }
 
       if (!speechEnabled.value) {
         lastError.value = "Speech recognition not available on this device.";
@@ -236,6 +243,33 @@ class TaskController extends GetxController {
     }
   }
 
+  String _getBestLocale() {
+    if (Get.locale == null) return "en-US";
+
+    String currentLang = Get.locale!.languageCode; // e.g. 'es', 'ar'
+    String currentFull = Get.locale!.toString().replaceAll(
+      '_',
+      '-',
+    ); // e.g. 'es-ES'
+
+    // 1. Try exact match (e.g. 'es-ES')
+    for (var loc in supportedLocales) {
+      if (loc.localeId.toLowerCase() == currentFull.toLowerCase()) {
+        return loc.localeId;
+      }
+    }
+
+    // 2. Try language only match (e.g. 'es')
+    for (var loc in supportedLocales) {
+      if (loc.localeId.split('-')[0].toLowerCase() ==
+          currentLang.toLowerCase()) {
+        return loc.localeId;
+      }
+    }
+
+    return currentFull; // Fallback to current app locale string
+  }
+
   void startListening() async {
     lastError.value = "";
 
@@ -247,7 +281,9 @@ class TaskController extends GetxController {
       recognizedText.value = "";
       isListening.value = true;
       try {
-        String localeId = Get.locale?.toString() ?? "en_US";
+        String localeId = _getBestLocale();
+        print('Starting voice recognition with best locale: $localeId');
+
         await _speech.listen(
           onResult: (result) {
             recognizedText.value = result.recognizedWords;
