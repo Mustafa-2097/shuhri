@@ -308,12 +308,17 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
     _selectedDateTime = parsed.dateTime;
     _selectedPriority = parsed.priority;
 
-    if (parsed.duration == 30)
+    if (parsed.duration == 30) {
       _selectedDurationChip = 0;
-    else if (parsed.duration == 60)
+    } else if (parsed.duration == 60) {
       _selectedDurationChip = 1;
-    else if (parsed.duration == 120)
+    } else if (parsed.duration == 120) {
       _selectedDurationChip = 2;
+    } else {
+      _selectedDurationChip = -1;
+      _customDurationController.text = parsed.duration.toString();
+    }
+
     _descController = TextEditingController();
     _customDurationController.addListener(() {
       if (_customDurationController.text.isNotEmpty) {
