@@ -39,16 +39,16 @@ class TaskModel {
       status: json['status'] ?? 'PENDING',
     );
   }
-  
+
   bool get isCompleted => status == 'COMPLETED';
-  
+
   String get time {
     try {
       final dt = DateTime.parse(dateTime).toLocal();
       final hour = dt.hour > 12 ? dt.hour - 12 : (dt.hour == 0 ? 12 : dt.hour);
       final amPm = dt.hour >= 12 ? 'PM' : 'AM';
       return "$hour:${dt.minute.toString().padLeft(2, '0')} $amPm";
-    } catch(e) {
+    } catch (e) {
       return "12:00 PM";
     }
   }
@@ -56,9 +56,22 @@ class TaskModel {
   String get formattedDate {
     try {
       final dt = DateTime.parse(dateTime).toLocal();
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const months = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
       return '${dt.day} ${months[dt.month - 1]} ${dt.year}';
-    } catch(e) {
+    } catch (e) {
       return '--';
     }
   }
@@ -69,13 +82,13 @@ class TaskModel {
 class TaskController extends GetxController {
   // Task state
   var tasks = <TaskModel>[].obs;
-  
+
   // Form state
   var selectedDuration = 1.obs; // 0: 30m, 1: 1h, 2: 2h
   var selectedPriority = 'MEDIUM'.obs; // HIGH | MEDIUM | LOW
   var isHighPriority = false.obs; // kept for legacy voice_ui usage
   var isToday = false.obs;
-  
+
   // Speech state
   final stt.SpeechToText _speech = stt.SpeechToText();
   var isListening = false.obs;
@@ -94,16 +107,18 @@ class TaskController extends GetxController {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('accessToken');
-      
+
       final response = await http.get(
-        Uri.parse('${ApiEndpoints.tasks}?page=1&limit=50&sortBy=dateTime&sortOrder=asc'),
+        Uri.parse(
+          '${ApiEndpoints.tasks}?page=1&limit=50&sortBy=dateTime&sortOrder=asc',
+        ),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
           'ngrok-skip-browser-warning': 'true',
         },
       );
-      
+
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         final rawData = body['data'];
@@ -131,7 +146,7 @@ class TaskController extends GetxController {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('accessToken');
-      
+
       final response = await http.get(
         Uri.parse('${ApiEndpoints.tasks}/$taskId'),
         headers: {
@@ -140,7 +155,7 @@ class TaskController extends GetxController {
           'ngrok-skip-browser-warning': 'true',
         },
       );
-      
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data['data'] != null) {
@@ -157,7 +172,7 @@ class TaskController extends GetxController {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('accessToken');
-      
+
       final response = await http.get(
         Uri.parse(ApiEndpoints.taskStats),
         headers: {
@@ -182,7 +197,8 @@ class TaskController extends GetxController {
       status = await Permission.microphone.request();
     }
     if (status.isPermanentlyDenied) {
-      lastError.value = "Microphone permission is permanently denied. Please enable it in settings.";
+      lastError.value =
+          "Microphone permission is permanently denied. Please enable it in settings.";
     }
   }
 
@@ -190,10 +206,10 @@ class TaskController extends GetxController {
     if (_isInitializing) return;
     _isInitializing = true;
     lastError.value = "";
-    
+
     try {
       await _requestPermission();
-      
+
       speechEnabled.value = await _speech.initialize(
         onStatus: (status) {
           print('Speech status: $status');
@@ -207,7 +223,7 @@ class TaskController extends GetxController {
           isListening.value = false;
         },
       );
-      
+
       if (!speechEnabled.value) {
         lastError.value = "Speech recognition not available on this device.";
       }
@@ -222,7 +238,7 @@ class TaskController extends GetxController {
 
   void startListening() async {
     lastError.value = "";
-    
+
     if (!speechEnabled.value) {
       await _initSpeech();
     }
@@ -231,6 +247,7 @@ class TaskController extends GetxController {
       recognizedText.value = "";
       isListening.value = true;
       try {
+        String localeId = Get.locale?.toString() ?? "en_US";
         await _speech.listen(
           onResult: (result) {
             recognizedText.value = result.recognizedWords;
@@ -238,6 +255,7 @@ class TaskController extends GetxController {
               isListening.value = false;
             }
           },
+          localeId: localeId,
           listenFor: const Duration(seconds: 30),
           pauseFor: const Duration(seconds: 5),
           partialResults: true,
@@ -276,7 +294,9 @@ class TaskController extends GetxController {
     isToday.toggle();
   }
 
-  void addTask(String title, String description, {
+  void addTask(
+    String title,
+    String description, {
     String? dateTime,
     int? duration,
     String? priority,
@@ -286,9 +306,20 @@ class TaskController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('accessToken');
 
-      final int durMin = duration ?? (selectedDuration.value == 0 ? 30 : selectedDuration.value == 1 ? 60 : 120);
+      final int durMin =
+          duration ??
+          (selectedDuration.value == 0
+              ? 30
+              : selectedDuration.value == 1
+              ? 60
+              : 120);
       final String prio = priority ?? selectedPriority.value;
-      final String dt = dateTime ?? DateTime.now().add(const Duration(hours: 1)).toUtc().toIso8601String();
+      final String dt =
+          dateTime ??
+          DateTime.now()
+              .add(const Duration(hours: 1))
+              .toUtc()
+              .toIso8601String();
 
       final response = await http.post(
         Uri.parse(ApiEndpoints.tasks),
@@ -305,7 +336,7 @@ class TaskController extends GetxController {
           "priority": prio,
         }),
       );
-      
+
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Task Created');
         fetchTasks();
@@ -377,7 +408,9 @@ class TaskController extends GetxController {
         },
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201 || response.statusCode == 204) {
+      if (response.statusCode == 200 ||
+          response.statusCode == 201 ||
+          response.statusCode == 204) {
         EasyLoading.showSuccess('Task deleted');
         fetchTasks();
       } else {

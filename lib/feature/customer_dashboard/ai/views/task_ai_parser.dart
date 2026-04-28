@@ -51,12 +51,13 @@ class TaskAIParser {
     // 3. Parse Date (Multilingual)
     if (text.contains("tomorrow") || text.contains("mañana") || text.contains("غدا") || text.contains("morgen") || text.contains("demain")) {
       taskTime = DateTime(now.year, now.month, now.day + 1, taskTime.hour, taskTime.minute);
+    } else if (text.contains("day after tomorrow") || text.contains("pasado mañana") || text.contains("بعد غد") || text.contains("übermorgen") || text.contains("après-demain")) {
+      taskTime = DateTime(now.year, now.month, now.day + 2, taskTime.hour, taskTime.minute);
     } else if (text.contains("today") || text.contains("hoy") || text.contains("اليوم") || text.contains("heute") || text.contains("aujourd'hui")) {
       taskTime = DateTime(now.year, now.month, now.day, taskTime.hour, taskTime.minute);
     }
 
     // 4. Parse Time (Improved Regex)
-    // Supports 10:00, 10am, 10 a.m., 10:00 p.m.
     final timeMatch = RegExp(r'(\d{1,2})(?::(\d{2}))?\s*([ap]\.?m\.?)?').firstMatch(text);
     if (timeMatch != null) {
       int hour = int.parse(timeMatch.group(1)!);
@@ -86,21 +87,22 @@ class TaskAIParser {
       r"at \d{1,2}(?::\d{2})?\s*([ap]\.?m\.?)?",
       r"\d{1,2}(?::\d{2})?\s*([ap]\.?m\.?)",
       r"\b([ap]\.?m\.?)\b",
-      // Common prefixes/articles/conjunctions
+      // Common prefixes/articles/conjunctions (Multilingual)
       r"\b(add|set|create|task|a|an|the|and|añadir|crear|tarea|un|una|el|la|y|أضف|إنشاء|مهمة|ال|و|hinzufügen|erstellen|aufgabe|ein|eine|der|die|das|und|ajouter|créer|tâche|un|une|le|la|et)\b",
-
-      // Prepositions
+      // Prepositions (Multilingual)
       r"\b(on|at|for|en|a|para|في|ب|على|am|um|für|sur|pour|dans)\b",
-      // Relative times
+      // Relative times (Multilingual)
       r"\b(morning|afternoon|evening|night|mañana|tarde|noche|صباح|ظهيرة|مساء|ليل|morgen|nachmittag|abend|nacht|matin|après-midi|soir|nuit)\b",
+      // Language specific filler words
+      r"\b(remind me to|record|please|por favor|recuérdame|يرجى|ذكرني|bitte|erinnere mich an|s'il vous plaît|rappelle-moi de)\b",
     ];
-
 
     for (var pattern in toRemove) {
       title = title.replaceAll(RegExp(pattern, caseSensitive: false), "");
     }
 
     // Final cleanup of extra spaces and punctuation
+    // Preserve letters from multiple scripts (Latin, Arabic)
     title = title.replaceAll(RegExp(r'\s+'), " ").replaceAll(RegExp(r'^[^\w\u0600-\u06FF]+|[^\w\u0600-\u06FF]+$'), "").trim();
     
     if (title.isNotEmpty) {

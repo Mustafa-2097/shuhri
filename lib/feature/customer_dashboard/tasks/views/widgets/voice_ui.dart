@@ -436,7 +436,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Voice Prompt Overview',
+                          'voice_overview'.tr,
                           style: TextStyle(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w800,
@@ -444,7 +444,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                           ),
                         ),
                         Text(
-                          'Review, edit and confirm your task',
+                          'review_confirm'.tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: const Color(0xFF64748B),
@@ -472,7 +472,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                         ),
                         SizedBox(width: 4.w),
                         Text(
-                          'AI Transcribed',
+                          'ai_transcribed'.tr,
                           style: TextStyle(
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w700,
@@ -494,7 +494,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Recognized text (editable)
-                    _sectionLabel('Task Title', Icons.edit_rounded),
+                    _sectionLabel('task_title'.tr, Icons.edit_rounded),
                     SizedBox(height: 8.h),
                     Container(
                       width: double.infinity,
@@ -545,7 +545,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
 
                     SizedBox(height: 18.h),
                     _sectionLabel(
-                      'Description (optional)',
+                      'description'.tr,
                       Icons.notes_rounded,
                     ),
                     SizedBox(height: 8.h),
@@ -581,7 +581,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                     ),
 
                     SizedBox(height: 18.h),
-                    _sectionLabel('Date & Time', Icons.calendar_today_rounded),
+                    _sectionLabel('task_date'.tr, Icons.calendar_today_rounded),
                     SizedBox(height: 8.h),
                     GestureDetector(
                       onTap: _pickDateTime,
@@ -632,7 +632,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                     ),
 
                     SizedBox(height: 18.h),
-                    _sectionLabel('Duration', Icons.timer_outlined),
+                    _sectionLabel('duration_desc'.tr, Icons.timer_outlined),
                     SizedBox(height: 8.h),
                     // Custom input
                     Container(
@@ -749,7 +749,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                     ),
 
                     SizedBox(height: 18.h),
-                    _sectionLabel('Priority', Icons.flag_rounded),
+                    _sectionLabel('priority'.tr, Icons.flag_rounded),
                     SizedBox(height: 8.h),
                     Row(
                       children: _priorities.asMap().entries.map((entry) {
@@ -812,7 +812,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                       children: [
                         Expanded(
                           child: _buildActionButton(
-                            label: 'Retry',
+                            label: 'retry'.tr,
                             onTap: () {
                               controller.recognizedText.value = '';
                               Get.back();
@@ -826,13 +826,13 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                         Expanded(
                           flex: 2,
                           child: _buildActionButton(
-                            label: 'Confirm & Add',
+                            label: 'confirm_add'.tr,
                             onTap: () {
                               final title = _textController.text.trim();
                               if (title.isEmpty) {
                                 Get.snackbar(
-                                  'Empty Task',
-                                  'Please enter a task title',
+                                  'empty_task_error'.tr,
+                                  'task_name_required'.tr,
                                   snackPosition: SnackPosition.BOTTOM,
                                 );
                                 return;
@@ -840,7 +840,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                               controller.addTask(
                                 title,
                                 _descController.text.trim().isEmpty
-                                    ? 'Task created via AI voice'
+                                    ? 'task_added_ai'.tr
                                     : _descController.text.trim(),
                                 dateTime: _selectedDateTime
                                     .toUtc()

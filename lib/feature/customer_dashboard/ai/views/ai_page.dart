@@ -191,14 +191,14 @@ class AIPage extends StatelessWidget {
                       color: const Color(0xFF0F172A),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () => controller.fetchTasks(),
-                    child: Icon(
-                      Icons.refresh_rounded,
-                      color: const Color(0xFF2563EB),
-                      size: 20.sp,
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () => controller.fetchTasks(),
+                  //   child: Icon(
+                  //     Icons.refresh_rounded,
+                  //     color: const Color(0xFF2563EB),
+                  //     size: 20.sp,
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(height: 12.h),
