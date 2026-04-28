@@ -1,7 +1,9 @@
 class ApiEndpoints {
   //static const String baseUrl = 'https://05e2-137-59-180-177.ngrok-free.app/api/v1';
   //static const String baseUrl = 'https://0e1b-137-59-180-177.ngrok-free.app/api/v1';
-  static const String baseUrl = 'https://1bb7-137-59-180-177.ngrok-free.app/api/v1';
+  //static const String baseUrl = 'https://1bb7-137-59-180-177.ngrok-free.app/api/v1';
+  static const String baseUrl =
+      'https://fe8c-137-59-180-177.ngrok-free.app/api/v1';
   //https://1bb7-137-59-180-177.ngrok-free.app/
 
   //static const String baseUrl ='https://05e2-137-59-180-177.ngrok-free.app/api/docs/';
