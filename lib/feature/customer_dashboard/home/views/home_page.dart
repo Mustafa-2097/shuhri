@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
 import 'package:shukriraad/feature/profile/view/profile_page.dart';
 import 'package:shukriraad/feature/customer_dashboard/tasks/views/add_task_page.dart';
 import 'package:shukriraad/feature/customer_dashboard/tasks/views/edit_task_page.dart';
@@ -59,7 +60,7 @@ class HomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'welcome_back'.tr,
+                  _getGreeting(),
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w800,
@@ -67,7 +68,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'ready_for_tasks'.tr,
+                  'day_optimized'.tr,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: const Color(0xFF64748B),
@@ -125,10 +126,13 @@ class HomePage extends StatelessWidget {
                 backgroundColor: const Color(0xFFF1F5F9),
                 child: GestureDetector(
                   onTap: () => Get.to(() => const ProfilePage()),
-                  child: const Icon(
-                    Icons.person,
-                    color: Color(0xFF2563EB),
-                  ), // Placeholder for image
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.r),
+                    child: Image.asset(
+                      'assets/images/profile_placeholder.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -158,7 +162,7 @@ class HomePage extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.r),
-          border: Border.all(color: const Color(0xFFF1F5F9)),
+          border: Border.all(color: AppColors.grayColor),
           boxShadow: [
             BoxShadow(
               color: const Color(0xFF0F172A).withOpacity(0.05),
@@ -382,8 +386,11 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildTaskList() {
-    return Obx(
-      () => Column(
+    return Obx(() {
+      if (taskController.tasks.isEmpty) {
+        return _buildEmptyState();
+      }
+      return Column(
         children: taskController.tasks.asMap().entries.map((entry) {
           final index = entry.key;
           final task = entry.value;
@@ -392,8 +399,52 @@ class HomePage extends StatelessWidget {
             child: _buildTaskItem(index: index, task: task),
           );
         }).toList(),
+      );
+    });
+  }
+
+  Widget _buildEmptyState() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 60.h),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Using auto_awesome as it matches the sparkles in the image
+            Icon(
+              Icons.auto_awesome_rounded,
+              size: 80.sp,
+              color: const Color(0xFFFFB800),
+            ),
+            SizedBox(height: 24.h),
+            Text(
+              'lets_plan_day'.tr,
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w800,
+                color: const Color(0xFF0F172A),
+              ),
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              'add_first_task'.tr,
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: const Color(0xFF64748B),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  String _getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) return 'Good Morning';
+    if (hour < 17) return 'Good Afternoon';
+    return 'Good Evening';
   }
 
   Widget _buildTaskItem({required int index, required TaskModel task}) {
