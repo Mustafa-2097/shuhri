@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/core/constant/widgets/primary_button.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/controllers/task_controller.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/views/widgets/voice_ui.dart';
+import 'package:shukriraad/core/constant/widgets/primary_button.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/controllers/task_controller.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/views/widgets/voice_ui.dart';
 
 class AddTaskPage extends StatefulWidget {
   AddTaskPage({super.key});
@@ -416,9 +416,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ],
     );
   }
+
   Widget _buildPriorityChips() {
     return Obx(
-          () => Wrap(
+      () => Wrap(
         spacing: 8.w,
         runSpacing: 10.h,
         children: _priorities.map((p) {
@@ -440,11 +441,18 @@ class _AddTaskPageState extends State<AddTaskPage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.flag_rounded, color: isSelected ? color : const Color(0xFFCBD5E1), size: 16),
+                  Icon(
+                    Icons.flag_rounded,
+                    color: isSelected ? color : const Color(0xFFCBD5E1),
+                    size: 16,
+                  ),
                   SizedBox(width: 5.w),
                   Text(
                     p['label'] as String,
-                    style: TextStyle(fontSize: 13.sp, color: isSelected ? color : const Color(0xFF64748B)),
+                    style: TextStyle(
+                      fontSize: 13.sp,
+                      color: isSelected ? color : const Color(0xFF64748B),
+                    ),
                   ),
                 ],
               ),

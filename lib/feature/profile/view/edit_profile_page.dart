@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/core/constant/app_colors.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
 import '../controller/edit_profile_controller.dart';
 import '../controller/profile_controller.dart';
-
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});
@@ -69,7 +68,8 @@ class EditProfilePage extends StatelessWidget {
                           );
                         }
                         // Show existing network image if available
-                        final existingUrl = Get.isRegistered<ProfileController>()
+                        final existingUrl =
+                            Get.isRegistered<ProfileController>()
                             ? ProfileController.instance.profileImage.value
                             : '';
                         if (existingUrl.isNotEmpty) {

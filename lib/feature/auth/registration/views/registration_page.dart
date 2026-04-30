@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/feature/auth/registration/views/pages/popup_agreement.dart';
+import 'package:shukriraad/feature/auth/registration/views/pages/popup_agreement.dart';
 import '../../../../core/constant/app_colors.dart';
 import '../../../../core/constant/app_text_styles.dart';
 import '../../../../core/constant/widgets/input_text_field.dart';
@@ -12,7 +12,8 @@ import 'pages/registration_otp_page.dart';
 
 class RegistrationPage extends StatelessWidget {
   RegistrationPage({super.key});
-  final RegistrationPageController controller = Get.find<RegistrationPageController>();
+  final RegistrationPageController controller =
+      Get.find<RegistrationPageController>();
 
   @override
   Widget build(BuildContext context) {

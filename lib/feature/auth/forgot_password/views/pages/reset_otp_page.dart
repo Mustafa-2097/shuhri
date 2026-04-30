@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/feature/auth/forgot_password/views/pages/reset_password_page.dart';
+import 'package:shukriraad/feature/auth/forgot_password/views/pages/reset_password_page.dart';
 import '../../../../../core/constant/app_colors.dart';
 import '../../../../../core/constant/app_text_styles.dart';
 import '../../../../../core/constant/widgets/auth_app_bar.dart';
@@ -40,7 +40,9 @@ class ResetOtpPage extends StatelessWidget {
               // Custom OTP Box tailored to the UI (4 circles)
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: OtpBox(onChanged: (value) => controller.otp.value = value),
+                child: OtpBox(
+                  onChanged: (value) => controller.otp.value = value,
+                ),
               ),
               SizedBox(height: 30.h),
 
@@ -65,7 +67,6 @@ class ResetOtpPage extends StatelessWidget {
                         ..onTap = () {
                           controller.resendOtp();
                         },
-
                     ),
                   ],
                 ),

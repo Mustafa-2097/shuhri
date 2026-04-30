@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/feature/auth/forgot_password/views/pages/reset_otp_page.dart';
+import 'package:shukriraad/feature/auth/forgot_password/views/pages/reset_otp_page.dart';
 import '../../../../core/constant/app_text_styles.dart';
 import '../../../../core/constant/widgets/auth_app_bar.dart';
 import '../../../../core/constant/widgets/input_text_field.dart';
@@ -12,7 +12,8 @@ import '../controllers/forgot_password_controller.dart';
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({super.key});
 
-  final ForgotPasswordController controller = Get.find<ForgotPasswordController>();
+  final ForgotPasswordController controller =
+      Get.find<ForgotPasswordController>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,10 @@ class ForgotPasswordPage extends StatelessWidget {
               SizedBox(height: 30.h),
 
               // Next Button
-              PrimaryButton(text: "Next", onPressed: () => controller.sendForgotPassword()),
+              PrimaryButton(
+                text: "Next",
+                onPressed: () => controller.sendForgotPassword(),
+              ),
               SizedBox(height: 30.h),
             ],
           ),

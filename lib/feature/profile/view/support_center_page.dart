@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/core/constant/app_colors.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
 
 class SupportCenterPage extends StatelessWidget {
   const SupportCenterPage({super.key});
@@ -22,11 +22,7 @@ class SupportCenterPage extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey.withOpacity(0.1),
             ),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black54,
-              size: 20.sp,
-            ),
+            child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
           ),
         ),
         title: Text(
@@ -51,8 +47,11 @@ class SupportCenterPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFAQItem(String questionKey, String answerKey,
-      {bool isExpanded = false}) {
+  Widget _buildFAQItem(
+    String questionKey,
+    String answerKey, {
+    bool isExpanded = false,
+  }) {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
@@ -64,7 +63,7 @@ class SupportCenterPage extends StatelessWidget {
             color: Colors.black.withOpacity(0.01),
             blurRadius: 10.r,
             spreadRadius: 1.r,
-          )
+          ),
         ],
       ),
       child: Theme(

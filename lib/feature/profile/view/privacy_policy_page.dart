@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/core/constant/app_colors.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});
@@ -22,11 +22,7 @@ class PrivacyPolicyPage extends StatelessWidget {
               shape: BoxShape.circle,
               color: Colors.grey.withOpacity(0.1),
             ),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black54,
-              size: 20.sp,
-            ),
+            child: Icon(Icons.arrow_back, color: Colors.black54, size: 20.sp),
           ),
         ),
         title: Text(
@@ -43,8 +39,14 @@ class PrivacyPolicyPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildPolicySection('privacy_data_collection', 'privacy_data_collection_desc'),
-            _buildPolicySection('privacy_ai_processing', 'privacy_ai_processing_desc'),
+            _buildPolicySection(
+              'privacy_data_collection',
+              'privacy_data_collection_desc',
+            ),
+            _buildPolicySection(
+              'privacy_ai_processing',
+              'privacy_ai_processing_desc',
+            ),
             _buildPolicySection('privacy_security', 'privacy_security_desc'),
           ],
         ),

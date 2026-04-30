@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/core/constant/app_colors.dart';
-import 'package:shuhri/core/constant/widgets/primary_button.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
+import 'package:shukriraad/core/constant/widgets/primary_button.dart';
 import '../controller/change_password_controller.dart';
 
 class ChangePasswordPage extends StatelessWidget {
@@ -43,17 +43,38 @@ class ChangePasswordPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('old_password'.tr, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+            Text(
+              'old_password'.tr,
+              style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+            ),
             SizedBox(height: 8.h),
-            _buildTextField(controller.oldPasswordController, 'enter_old_password'.tr, true),
+            _buildTextField(
+              controller.oldPasswordController,
+              'enter_old_password'.tr,
+              true,
+            ),
             SizedBox(height: 20.h),
-            Text('new_password'.tr, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+            Text(
+              'new_password'.tr,
+              style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+            ),
             SizedBox(height: 8.h),
-            _buildTextField(controller.newPasswordController, 'enter_new_password'.tr, true),
+            _buildTextField(
+              controller.newPasswordController,
+              'enter_new_password'.tr,
+              true,
+            ),
             SizedBox(height: 20.h),
-            Text('confirm_new_password'.tr, style: TextStyle(color: Colors.grey, fontSize: 14.sp)),
+            Text(
+              'confirm_new_password'.tr,
+              style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+            ),
             SizedBox(height: 8.h),
-            _buildTextField(controller.confirmPasswordController, 'confirm_new_password'.tr, true),
+            _buildTextField(
+              controller.confirmPasswordController,
+              'confirm_new_password'.tr,
+              true,
+            ),
             SizedBox(height: 40.h),
             PrimaryButton(
               text: 'update_password'.tr,
@@ -65,7 +86,11 @@ class ChangePasswordPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(TextEditingController controller, String hint, bool obscure) {
+  Widget _buildTextField(
+    TextEditingController controller,
+    String hint,
+    bool obscure,
+  ) {
     return TextFormField(
       controller: controller,
       obscureText: obscure,

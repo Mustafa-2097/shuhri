@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/feature/profile/view/profile_page.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/views/add_task_page.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/views/edit_task_page.dart';
-import 'package:shuhri/feature/customer_dashboard/notifications/views/notification_page.dart';
-import 'package:shuhri/feature/customer_dashboard/home/controllers/home_controller.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/controllers/task_controller.dart';
-import 'package:shuhri/feature/customer_dashboard/notifications/controllers/notification_controller.dart';
+import 'package:shukriraad/feature/profile/view/profile_page.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/views/add_task_page.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/views/edit_task_page.dart';
+import 'package:shukriraad/feature/customer_dashboard/notifications/views/notification_page.dart';
+import 'package:shukriraad/feature/customer_dashboard/home/controllers/home_controller.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/controllers/task_controller.dart';
+import 'package:shukriraad/feature/customer_dashboard/notifications/controllers/notification_controller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -191,9 +191,7 @@ class HomePage extends StatelessWidget {
                   child: _buildStatBox(totalTasks.toString(), 'total_tasks'.tr),
                 ),
                 SizedBox(width: 12.w),
-                Expanded(
-                  child: _buildStatBox(remain.toString(), 'remain'.tr),
-                ),
+                Expanded(child: _buildStatBox(remain.toString(), 'remain'.tr)),
                 SizedBox(width: 12.w),
                 Expanded(
                   child: _buildStatBox('${focusTime}h', 'focus_time'.tr),
@@ -438,136 +436,138 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
                 child: Row(
                   children: [
-                  // Time badge
-                  Container(
-                    width: 62.w,
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
-                    decoration: BoxDecoration(
-                      color: task.isCompleted
-                          ? const Color(0xFFF1F5F9)
-                          : const Color(0xFFEEF2FF),
-                      borderRadius: BorderRadius.circular(14.r),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.access_time_filled_rounded,
-                          color: task.isCompleted
-                              ? const Color(0xFF94A3B8)
-                              : const Color(0xFF2563EB),
-                          size: 14,
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          task.time,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.w700,
+                    // Time badge
+                    Container(
+                      width: 62.w,
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      decoration: BoxDecoration(
+                        color: task.isCompleted
+                            ? const Color(0xFFF1F5F9)
+                            : const Color(0xFFEEF2FF),
+                        borderRadius: BorderRadius.circular(14.r),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.access_time_filled_rounded,
                             color: task.isCompleted
                                 ? const Color(0xFF94A3B8)
-                                : const Color(0xFF312E81),
+                                : const Color(0xFF2563EB),
+                            size: 14,
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(width: 12.w),
-                  // Details
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          task.title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w700,
-                            color: task.isCompleted
-                                ? const Color(0xFF94A3B8)
-                                : const Color(0xFF0F172A),
-                            decoration: task.isCompleted
-                                ? TextDecoration.lineThrough
-                                : null,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_today_rounded,
-                              size: 10,
-                              color: const Color(0xFF94A3B8),
+                          SizedBox(height: 4.h),
+                          Text(
+                            task.time,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w700,
+                              color: task.isCompleted
+                                  ? const Color(0xFF94A3B8)
+                                  : const Color(0xFF312E81),
                             ),
-                            SizedBox(width: 3.w),
-                            Text(
-                              task.formattedDate,
-                              style: TextStyle(
-                                fontSize: 11.sp,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    // Details
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            task.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.w700,
+                              color: task.isCompleted
+                                  ? const Color(0xFF94A3B8)
+                                  : const Color(0xFF0F172A),
+                              decoration: task.isCompleted
+                                  ? TextDecoration.lineThrough
+                                  : null,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_today_rounded,
+                                size: 10,
                                 color: const Color(0xFF94A3B8),
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 3.w),
+                              Text(
+                                task.formattedDate,
+                                style: TextStyle(
+                                  fontSize: 11.sp,
+                                  color: const Color(0xFF94A3B8),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 6.h),
+                          Row(
+                            children: [
+                              _buildMiniTag(
+                                '${task.duration}m',
+                                const Color(0xFF2563EB),
+                                const Color(0xFFEEF2FF),
+                              ),
+                              SizedBox(width: 6.w),
+                              _buildMiniTag(
+                                task.priority.toLowerCase().tr,
+                                priorityColor(task.priority),
+                                priorityColor(task.priority).withOpacity(0.1),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Actions column
+                    Column(
+                      children: [
+                        _buildTaskAction(
+                          icon: task.isCompleted
+                              ? Icons.undo_rounded
+                              : Icons.check,
+                          color: const Color(0xFF22C55E),
+                          bgColor: const Color(0xFFDCFCE7),
+                          onTap: () =>
+                              taskController.toggleTaskCompletion(index),
                         ),
                         SizedBox(height: 6.h),
-                        Row(
-                          children: [
-                            _buildMiniTag(
-                              '${task.duration}m',
-                              const Color(0xFF2563EB),
-                              const Color(0xFFEEF2FF),
-                            ),
-                            SizedBox(width: 6.w),
-                            _buildMiniTag(
-                              task.priority.toLowerCase().tr,
-                              priorityColor(task.priority),
-                              priorityColor(task.priority).withOpacity(0.1),
-                            ),
-                          ],
+                        _buildTaskAction(
+                          icon: Icons.edit_outlined,
+                          color: const Color(0xFF2563EB),
+                          bgColor: const Color(0xFFDBEAFE),
+                          onTap: () => Get.bottomSheet(
+                            EditTaskPage(task: task),
+                            isScrollControlled: true,
+                          ),
+                        ),
+                        SizedBox(height: 6.h),
+                        _buildTaskAction(
+                          icon: Icons.delete_outline_rounded,
+                          color: const Color(0xFFEF4444),
+                          bgColor: const Color(0xFFFEE2E2),
+                          onTap: () => taskController.deleteTask(index),
                         ),
                       ],
                     ),
-                  ),
-                  // Actions column
-                  Column(
-                    children: [
-                      _buildTaskAction(
-                        icon: task.isCompleted
-                            ? Icons.undo_rounded
-                            : Icons.check,
-                        color: const Color(0xFF22C55E),
-                        bgColor: const Color(0xFFDCFCE7),
-                        onTap: () => taskController.toggleTaskCompletion(index),
-                      ),
-                      SizedBox(height: 6.h),
-                      _buildTaskAction(
-                        icon: Icons.edit_outlined,
-                        color: const Color(0xFF2563EB),
-                        bgColor: const Color(0xFFDBEAFE),
-                        onTap: () => Get.bottomSheet(
-                          EditTaskPage(task: task),
-                          isScrollControlled: true,
-                        ),
-                      ),
-                      SizedBox(height: 6.h),
-                      _buildTaskAction(
-                        icon: Icons.delete_outline_rounded,
-                        color: const Color(0xFFEF4444),
-                        bgColor: const Color(0xFFFEE2E2),
-                        onTap: () => taskController.deleteTask(index),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Widget _buildMiniTag(String text, Color color, Color bgColor) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shuhri/feature/customer_dashboard/ai/views/ai_page.dart';
-import 'package:shuhri/feature/customer_dashboard/dashboard/widgets/bottom_nav.dart';
+import 'package:shukriraad/feature/customer_dashboard/ai/views/ai_page.dart';
+import 'package:shukriraad/feature/customer_dashboard/dashboard/widgets/bottom_nav.dart';
 import '../home/views/home_page.dart';
 import '../tasks/views/task_list_page.dart';
 import '../ai/views/ai_page.dart';

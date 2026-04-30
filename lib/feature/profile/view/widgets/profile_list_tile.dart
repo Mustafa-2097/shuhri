@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shuhri/core/constant/app_colors.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
 
 class ProfileListTile extends StatelessWidget {
   final Widget icon;
@@ -42,10 +42,7 @@ class ProfileListTile extends StatelessWidget {
           if (trailingText != null)
             Text(
               trailingText!,
-              style: TextStyle(
-                color: AppColors.subTextColor,
-                fontSize: 14.sp,
-              ),
+              style: TextStyle(color: AppColors.subTextColor, fontSize: 14.sp),
             ),
           SizedBox(width: 8.w),
           Icon(

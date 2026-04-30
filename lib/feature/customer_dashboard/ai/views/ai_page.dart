@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/controllers/task_controller.dart';
-import 'package:shuhri/feature/customer_dashboard/tasks/views/widgets/voice_ui.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/controllers/task_controller.dart';
+import 'package:shukriraad/feature/customer_dashboard/tasks/views/widgets/voice_ui.dart';
 
 class AIPage extends StatelessWidget {
   const AIPage({super.key});

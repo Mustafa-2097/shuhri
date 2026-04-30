@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'api_endpoints.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/feature/auth/login/views/login_page.dart';
+import 'package:shukriraad/feature/auth/login/views/login_page.dart';
 
 class AuthService {
   /// Refresh Token

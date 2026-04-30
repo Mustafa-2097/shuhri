@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shuhri/core/network/api_endpoints.dart';
+import 'package:shukriraad/core/network/api_endpoints.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +14,7 @@ import 'profile_controller.dart';
 class EditProfileController extends GetxController {
   final nameController = TextEditingController();
   final emailController = TextEditingController(); // Just for display
-  
+
   var selectedImage = Rxn<File>();
 
   @override
@@ -46,15 +46,18 @@ class EditProfileController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('accessToken');
 
-      var request = http.MultipartRequest('PUT', Uri.parse(ApiEndpoints.updateProfile));
+      var request = http.MultipartRequest(
+        'PUT',
+        Uri.parse(ApiEndpoints.updateProfile),
+      );
       request.headers['Authorization'] = 'Bearer $token';
       request.headers['ngrok-skip-browser-warning'] = 'true';
 
       final dataObj = {
         "name": nameController.text.trim(),
-        "isAcceptedTerms": true
+        "isAcceptedTerms": true,
       };
-      
+
       request.fields['data'] = jsonEncode(dataObj);
 
       if (selectedImage.value != null) {
@@ -63,17 +66,19 @@ class EditProfileController extends GetxController {
         final mimeType = ext == 'jpg' || ext == 'jpeg'
             ? 'jpeg'
             : ext == 'png'
-                ? 'png'
-                : ext == 'gif'
-                    ? 'gif'
-                    : ext == 'webp'
-                        ? 'webp'
-                        : 'jpeg';
-        request.files.add(await http.MultipartFile.fromPath(
-          'profileImage',
-          imagePath,
-          contentType: MediaType('image', mimeType),
-        ));
+            ? 'png'
+            : ext == 'gif'
+            ? 'gif'
+            : ext == 'webp'
+            ? 'webp'
+            : 'jpeg';
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'profileImage',
+            imagePath,
+            contentType: MediaType('image', mimeType),
+          ),
+        );
       }
 
       var response = await request.send();
@@ -82,14 +87,16 @@ class EditProfileController extends GetxController {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Profile updated successfully');
-        
+
         if (Get.isRegistered<ProfileController>()) {
           ProfileController.instance.getProfile();
         }
 
         Get.back();
       } else {
-        EasyLoading.showError(jsonResponse['message'] ?? 'Failed to update profile');
+        EasyLoading.showError(
+          jsonResponse['message'] ?? 'Failed to update profile',
+        );
       }
     } catch (e) {
       EasyLoading.showError('An error occurred. Please try again.');

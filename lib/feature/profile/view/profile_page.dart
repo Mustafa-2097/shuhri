@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shuhri/core/constant/app_colors.dart';
-import 'package:shuhri/feature/customer_dashboard/notifications/views/notification_page.dart';
-import 'package:shuhri/feature/profile/view/widgets/profile_list_tile.dart';
-import 'package:shuhri/feature/profile/view/edit_profile_page.dart';
-import 'package:shuhri/feature/profile/view/settings_page.dart';
-import 'package:shuhri/feature/profile/view/privacy_policy_page.dart';
-import 'package:shuhri/feature/profile/view/support_center_page.dart';
-import 'package:shuhri/feature/profile/view/widgets/logout_dialog.dart';
-import 'package:shuhri/feature/profile/controller/profile_controller.dart';
-import 'package:shuhri/feature/profile/view/change_password_page.dart';
+import 'package:shukriraad/core/constant/app_colors.dart';
+import 'package:shukriraad/feature/customer_dashboard/notifications/views/notification_page.dart';
+import 'package:shukriraad/feature/profile/view/widgets/profile_list_tile.dart';
+import 'package:shukriraad/feature/profile/view/edit_profile_page.dart';
+import 'package:shukriraad/feature/profile/view/settings_page.dart';
+import 'package:shukriraad/feature/profile/view/privacy_policy_page.dart';
+import 'package:shukriraad/feature/profile/view/support_center_page.dart';
+import 'package:shukriraad/feature/profile/view/widgets/logout_dialog.dart';
+import 'package:shukriraad/feature/profile/controller/profile_controller.dart';
+import 'package:shukriraad/feature/profile/view/change_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
   final bool showBackButton;
