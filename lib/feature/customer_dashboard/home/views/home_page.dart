@@ -9,12 +9,14 @@ import 'package:shukriraad/feature/customer_dashboard/notifications/views/notifi
 import 'package:shukriraad/feature/customer_dashboard/home/controllers/home_controller.dart';
 import 'package:shukriraad/feature/customer_dashboard/tasks/controllers/task_controller.dart';
 import 'package:shukriraad/feature/customer_dashboard/notifications/controllers/notification_controller.dart';
+import 'package:shukriraad/feature/profile/controller/profile_controller.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final homeController = Get.put(HomeController());
   final taskController = Get.put(TaskController());
   final notificationController = Get.put(NotificationController());
+  final profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -121,16 +123,30 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 12.w),
-              CircleAvatar(
-                radius: 20.r,
-                backgroundColor: const Color(0xFFF1F5F9),
-                child: GestureDetector(
-                  onTap: () => Get.to(() => const ProfilePage()),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.r),
-                    child: Image.asset(
-                      'assets/images/profile_placeholder.png',
-                      fit: BoxFit.cover,
+              Obx(
+                () => CircleAvatar(
+                  radius: 20.r,
+                  backgroundColor: const Color(0xFFF1F5F9),
+                  child: GestureDetector(
+                    onTap: () => Get.to(() => const ProfilePage()),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.r),
+                      child: profileController.profileImage.value.isNotEmpty
+                          ? Image.network(
+                              profileController.profileImage.value,
+                              fit: BoxFit.cover,
+                              width: 40.r,
+                              height: 40.r,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                'assets/images/profile_placeholder.png',
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Image.asset(
+                              'assets/images/profile_placeholder.png',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),
