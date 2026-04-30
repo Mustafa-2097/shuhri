@@ -11,7 +11,7 @@ class ProfileController extends GetxController {
   var isLoading = true.obs;
   var name = "".obs;
   var email = "".obs;
-  var profileImage = "".obs; // network URL from /auth/me
+  var profileImage = "".obs; 
   var selectedLanguage = "English".obs;
   
   final List<String> languages = [
