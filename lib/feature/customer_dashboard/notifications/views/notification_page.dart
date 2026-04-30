@@ -62,6 +62,9 @@ class _NotificationPageState extends State<NotificationPage> {
                       onTap: () => controller.markAsRead(
                         item['id'] ?? item['_id'] ?? '',
                       ),
+                      onDelete: () => controller.deleteNotification(
+                        item['id'] ?? item['_id'] ?? '',
+                      ),
                     ),
                   );
                 },
@@ -208,6 +211,7 @@ class _NotificationPageState extends State<NotificationPage> {
     required String time,
     required bool isUnread,
     VoidCallback? onTap,
+    VoidCallback? onDelete,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -250,7 +254,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                       child: Icon(icon, color: iconColor, size: 22.sp),
                     ),
-                    SizedBox(width: 16.w),
+                    SizedBox(width: 12.w),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,7 +282,7 @@ class _NotificationPageState extends State<NotificationPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 6.h),
+                          SizedBox(height: 4.h),
                           Text(
                             description,
                             maxLines: 2,
@@ -293,6 +297,16 @@ class _NotificationPageState extends State<NotificationPage> {
                         ],
                       ),
                     ),
+                    IconButton(
+                      onPressed: onDelete,
+                      icon: Icon(
+                        Icons.delete_outline,
+                        color: Colors.red.withOpacity(0.7),
+                        size: 20.sp,
+                      ),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                    ),
                   ],
                 ),
               ),
@@ -305,7 +319,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
   Widget _buildClearAllButton() {
     return GestureDetector(
-      onTap: () => controller.clearAllNotifications(),
+      onTap: () => controller.deleteAllNotifications(),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 16.h),

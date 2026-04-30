@@ -149,6 +149,8 @@ class _VoiceListeningScreenState extends State<VoiceListeningScreen> {
                                   ),
                                   child: Text(
                                     'Try Again',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.bold,
@@ -544,10 +546,7 @@ class _VoiceResultScreenState extends State<VoiceResultScreen> {
                     ),
 
                     SizedBox(height: 18.h),
-                    _sectionLabel(
-                      'description'.tr,
-                      Icons.notes_rounded,
-                    ),
+                    _sectionLabel('description'.tr, Icons.notes_rounded),
                     SizedBox(height: 8.h),
                     Container(
                       width: double.infinity,

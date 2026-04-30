@@ -54,25 +54,27 @@ class HomePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'welcome_back'.tr,
-                style: TextStyle(
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w800,
-                  color: const Color(0xFF0F172A),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'welcome_back'.tr,
+                  style: TextStyle(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w800,
+                    color: const Color(0xFF0F172A),
+                  ),
                 ),
-              ),
-              Text(
-                'ready_for_tasks'.tr,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: const Color(0xFF64748B),
+                Text(
+                  'ready_for_tasks'.tr,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: const Color(0xFF64748B),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Row(
             children: [
@@ -184,11 +186,18 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildStatBox(totalTasks.toString(), 'total_tasks'.tr),
-                _buildStatBox(remain.toString(), 'remain'.tr),
-                _buildStatBox('${focusTime}h', 'focus_time'.tr),
+                Expanded(
+                  child: _buildStatBox(totalTasks.toString(), 'total_tasks'.tr),
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: _buildStatBox(remain.toString(), 'remain'.tr),
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: _buildStatBox('${focusTime}h', 'focus_time'.tr),
+                ),
               ],
             ),
             SizedBox(height: 24.h),
@@ -321,7 +330,6 @@ class HomePage extends StatelessWidget {
 
   Widget _buildStatBox(String value, String label) {
     return Container(
-      width: 90.w,
       padding: EdgeInsets.symmetric(vertical: 16.h),
       decoration: BoxDecoration(
         color: const Color(0xFFF8FAFC),
@@ -397,38 +405,39 @@ class HomePage extends StatelessWidget {
       return const Color(0xFFF59E0B);
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: const Color(0xFFF1F5F9)),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF0F172A).withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          // Priority left bar
-          Container(
-            width: 5.w,
-            height: 92.h,
-            decoration: BoxDecoration(
-              color: priorityColor(task.priority),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                bottomLeft: Radius.circular(20.r),
+    return IntrinsicHeight(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(color: const Color(0xFFF1F5F9)),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF0F172A).withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Priority left bar
+            Container(
+              width: 5.w,
+              decoration: BoxDecoration(
+                color: priorityColor(task.priority),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.r),
+                  bottomLeft: Radius.circular(20.r),
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-              child: Row(
-                children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                child: Row(
+                  children: [
                   // Time badge
                   Container(
                     width: 62.w,
@@ -558,7 +567,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 
   Widget _buildMiniTag(String text, Color color, Color bgColor) {

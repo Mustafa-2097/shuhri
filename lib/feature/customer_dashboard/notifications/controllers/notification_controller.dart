@@ -161,8 +161,51 @@ class NotificationController extends GetxController {
     }
   }
 
-  void clearAllNotifications() {
-    // Clear notifications locally since there isn't a known backend endpoint for it.
-    notificationsList.clear();
+  Future<void> deleteNotification(String id) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('accessToken');
+
+      if (token == null) return;
+
+      final response = await http.delete(
+        Uri.parse(ApiEndpoints.deleteNotification(id)),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        notificationsList.removeWhere((n) => n['_id'] == id || n['id'] == id);
+      }
+    } catch (e) {
+      // Error handling
+    }
+  }
+
+  Future<void> deleteAllNotifications() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('accessToken');
+
+      if (token == null) return;
+
+      final response = await http.delete(
+        Uri.parse(ApiEndpoints.notifications),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+          'ngrok-skip-browser-warning': 'true',
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        notificationsList.clear();
+      }
+    } catch (e) {
+      // Error handling
+    }
   }
 }

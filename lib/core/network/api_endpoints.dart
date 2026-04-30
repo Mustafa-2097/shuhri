@@ -39,4 +39,5 @@ class ApiEndpoints {
       '$baseUrl/notifications/read-all';
   static String markNotificationRead(String id) =>
       '$baseUrl/notifications/$id/read';
+  static String deleteNotification(String id) => '$baseUrl/notifications/$id';
 }
