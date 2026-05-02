@@ -30,7 +30,7 @@ class RegistrationOtpPage extends StatelessWidget {
               Text("Enter OTP", style: AppTextStyles.title24(context)),
               SizedBox(height: 10.h),
               Text(
-                "We have just sent you 4 digit code via your\nemail example@gmail.com",
+                "We have just sent you 6 digit code via your\nemail ${controller.email}",
                 textAlign: TextAlign.center,
                 style: AppTextStyles.regular_16(context),
               ),

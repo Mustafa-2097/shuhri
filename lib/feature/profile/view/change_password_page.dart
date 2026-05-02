@@ -5,13 +5,28 @@ import 'package:shukriraad/core/constant/app_colors.dart';
 import 'package:shukriraad/core/constant/widgets/primary_button.dart';
 import '../controller/change_password_controller.dart';
 
-class ChangePasswordPage extends StatelessWidget {
+class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(ChangePasswordController());
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+}
 
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  late final ChangePasswordController controller;
+
+  bool _obscureOld = true;
+  bool _obscureNew = true;
+  bool _obscureConfirm = true;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(ChangePasswordController());
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
@@ -49,9 +64,10 @@ class ChangePasswordPage extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             _buildTextField(
-              controller.oldPasswordController,
-              'enter_old_password'.tr,
-              true,
+              controller: controller.oldPasswordController,
+              hint: 'enter_old_password'.tr,
+              obscure: _obscureOld,
+              onToggle: () => setState(() => _obscureOld = !_obscureOld),
             ),
             SizedBox(height: 20.h),
             Text(
@@ -60,9 +76,10 @@ class ChangePasswordPage extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             _buildTextField(
-              controller.newPasswordController,
-              'enter_new_password'.tr,
-              true,
+              controller: controller.newPasswordController,
+              hint: 'enter_new_password'.tr,
+              obscure: _obscureNew,
+              onToggle: () => setState(() => _obscureNew = !_obscureNew),
             ),
             SizedBox(height: 20.h),
             Text(
@@ -71,9 +88,10 @@ class ChangePasswordPage extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             _buildTextField(
-              controller.confirmPasswordController,
-              'confirm_new_password'.tr,
-              true,
+              controller: controller.confirmPasswordController,
+              hint: 'confirm_new_password'.tr,
+              obscure: _obscureConfirm,
+              onToggle: () => setState(() => _obscureConfirm = !_obscureConfirm),
             ),
             SizedBox(height: 40.h),
             PrimaryButton(
@@ -86,11 +104,12 @@ class ChangePasswordPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(
-    TextEditingController controller,
-    String hint,
-    bool obscure,
-  ) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+    required bool obscure,
+    required VoidCallback onToggle,
+  }) {
     return TextFormField(
       controller: controller,
       obscureText: obscure,
@@ -105,6 +124,18 @@ class ChangePasswordPage extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: Colors.grey.shade200),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide(color: AppColors.primaryColor),
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+            color: Colors.grey,
+            size: 20.sp,
+          ),
+          onPressed: onToggle,
         ),
       ),
     );
