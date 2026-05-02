@@ -52,7 +52,7 @@ class RegistrationPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    "Enter your company details for use in reports and documents.",
+                    "Create an account to start organizing your life and achieving your daily goals.",
                     textAlign: TextAlign.center,
                     style: AppTextStyles.regular_16(context),
                   ),
@@ -134,8 +134,8 @@ class RegistrationPage extends StatelessWidget {
                             !controller.agreedToTerms.value;
                       },
                       child: Container(
-                        width: 24.w,
-                        height: 24.w,
+                        width: 18.w,
+                        height: 18.w,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
@@ -149,7 +149,7 @@ class RegistrationPage extends StatelessWidget {
                         child: controller.agreedToTerms.value
                             ? Icon(
                                 Icons.check,
-                                size: 16.sp,
+                                size: 14.sp,
                                 color: AppColors.whiteColor,
                               )
                             : null,

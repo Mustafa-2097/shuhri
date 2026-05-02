@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    "Enter your company details for use in reports and documents.",
+                    "Sign in to manage your tasks, schedule your day, and boost your productivity.",
                     textAlign: TextAlign.center,
                     style: AppTextStyles.regular_16(context),
                   ),
