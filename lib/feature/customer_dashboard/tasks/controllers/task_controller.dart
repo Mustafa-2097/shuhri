@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../../../core/network/api_endpoints.dart';
 import 'package:intl/intl.dart';
+import '../../home/controllers/home_controller.dart';
 
 class TaskModel {
   String id;
@@ -259,7 +260,6 @@ class TaskController extends GetxController {
       }
     }
 
-    // 2. Try language only match (e.g. 'es')
     for (var loc in supportedLocales) {
       if (loc.localeId.split('-')[0].toLowerCase() ==
           currentLang.toLowerCase()) {
@@ -267,7 +267,7 @@ class TaskController extends GetxController {
       }
     }
 
-    return currentFull; // Fallback to current app locale string
+    return currentFull;
   }
 
   void startListening() async {
@@ -377,6 +377,9 @@ class TaskController extends GetxController {
         EasyLoading.showSuccess('Task Created');
         fetchTasks();
         fetchStats();
+        if (Get.isRegistered<HomeController>()) {
+          Get.find<HomeController>().fetchTodayOverview();
+        }
       } else {
         final data = jsonDecode(response.body);
         EasyLoading.showError(data['message'] ?? 'Failed to create task');
@@ -420,6 +423,9 @@ class TaskController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Task updated');
         fetchTasks();
+        if (Get.isRegistered<HomeController>()) {
+          Get.find<HomeController>().fetchTodayOverview();
+        }
       } else {
         final data = jsonDecode(response.body);
         EasyLoading.showError(data['message'] ?? 'Failed to update task');
@@ -449,6 +455,9 @@ class TaskController extends GetxController {
           response.statusCode == 204) {
         EasyLoading.showSuccess('Task deleted');
         fetchTasks();
+        if (Get.isRegistered<HomeController>()) {
+          Get.find<HomeController>().fetchTodayOverview();
+        }
       } else {
         final data = jsonDecode(response.body);
         EasyLoading.showError(data['message'] ?? 'Failed to delete task');
@@ -477,6 +486,9 @@ class TaskController extends GetxController {
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Status updated');
         fetchTasks();
+        if (Get.isRegistered<HomeController>()) {
+          Get.find<HomeController>().fetchTodayOverview();
+        }
       } else {
         final data = jsonDecode(response.body);
         EasyLoading.showError(data['message'] ?? 'Failed to update status');
