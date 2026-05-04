@@ -2,8 +2,8 @@ class ApiEndpoints {
   //static const String baseUrl = 'https://05e2-137-59-180-177.ngrok-free.app/api/v1';
   //static const String baseUrl = 'https://0e1b-137-59-180-177.ngrok-free.app/api/v1';
   //static const String baseUrl = 'https://1bb7-137-59-180-177.ngrok-free.app/api/v1';
-  static const String baseUrl =
-      'https://cf8b-182-252-90-97.ngrok-free.app/api/v1';
+  static const String baseUrl = 'http://206.162.244.189:8007/api/v1'; //http://206.162.244.189:8007/
+  //https://e89b-182-252-90-97.ngrok-free.app/
   //https://cf8b-182-252-90-97.ngrok-free.app/
   //https://1bb7-137-59-180-177.ngrok-free.app/
 
@@ -36,9 +36,7 @@ class ApiEndpoints {
   /// Notifications
   static const String notifications = '$baseUrl/notifications';
   static const String notificationsStream = '$baseUrl/notifications/stream';
-  static const String markAllNotificationsRead =
-      '$baseUrl/notifications/read-all';
-  static String markNotificationRead(String id) =>
-      '$baseUrl/notifications/$id/read';
+  static const String markAllNotificationsRead = '$baseUrl/notifications/read-all';
+  static String markNotificationRead(String id) => '$baseUrl/notifications/$id/read';
   static String deleteNotification(String id) => '$baseUrl/notifications/$id';
 }

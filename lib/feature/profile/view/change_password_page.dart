@@ -22,6 +22,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   void initState() {
     super.initState();
+    
     controller = Get.put(ChangePasswordController());
   }
 

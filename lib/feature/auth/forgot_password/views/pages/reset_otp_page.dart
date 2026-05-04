@@ -37,7 +37,7 @@ class ResetOtpPage extends StatelessWidget {
               ),
               SizedBox(height: 30.h),
 
-              // Custom OTP Box tailored to the UI (4 circles)
+
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: OtpBox(

@@ -18,12 +18,12 @@ class OnboardingPage1 extends StatelessWidget {
         children: [
           const Spacer(flex: 2),
 
-          /// ── Hero logo (shared with splash) ──────────────────────
+          /// ── Hero logo (shared with splash)
           AppLogoStack(size: 110.w),
 
           const Spacer(flex: 2),
 
-          /// ── Title ───────────────────────────────────────────────
+          /// ── Title
           Text(
             'Plan smarter.\nNot harder.',
             textAlign: TextAlign.center,
@@ -37,7 +37,7 @@ class OnboardingPage1 extends StatelessWidget {
 
           SizedBox(height: 14.h),
 
-          /// ── Subtitle ─────────────────────────────────────────────
+          /// ── Subtitle
           Text(
             'Let AI organize your day automatically.',
             textAlign: TextAlign.center,
@@ -51,7 +51,7 @@ class OnboardingPage1 extends StatelessWidget {
 
           const Spacer(flex: 3),
 
-          /// ── Button ──────────────────────────────────────────────
+          /// ── Button
           _OnboardingButton(label: 'Get Started', onTap: onNext),
 
           SizedBox(height: 36.h),
