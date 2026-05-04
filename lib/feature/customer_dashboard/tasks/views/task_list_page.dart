@@ -23,9 +23,9 @@ class _TaskListPageState extends State<TaskListPage> {
     'pending',
     'in_progress',
     'completed',
-    'high_priority',
-    'medium_priority',
-    'low_priority',
+    'high',
+    'medium',
+    'low',
   ];
 
   @override
@@ -56,13 +56,13 @@ class _TaskListPageState extends State<TaskListPage> {
       case 'completed':
         tasks = tasks.where((t) => t.status == 'COMPLETED').toList();
         break;
-      case 'high_priority':
+      case 'high':
         tasks = tasks.where((t) => t.priority == 'HIGH').toList();
         break;
-      case 'medium_priority':
+      case 'medium':
         tasks = tasks.where((t) => t.priority == 'MEDIUM').toList();
         break;
-      case 'low_priority':
+      case 'low':
         tasks = tasks.where((t) => t.priority == 'LOW').toList();
         break;
       default:

@@ -247,13 +247,9 @@ class TaskController extends GetxController {
   String _getBestLocale() {
     if (Get.locale == null) return "en-US";
 
-    String currentLang = Get.locale!.languageCode; // e.g. 'es', 'ar'
-    String currentFull = Get.locale!.toString().replaceAll(
-      '_',
-      '-',
-    ); // e.g. 'es-ES'
+    String currentLang = Get.locale!.languageCode;
+    String currentFull = Get.locale!.toString().replaceAll('_', '-');
 
-    // 1. Try exact match (e.g. 'es-ES')
     for (var loc in supportedLocales) {
       if (loc.localeId.toLowerCase() == currentFull.toLowerCase()) {
         return loc.localeId;
@@ -375,10 +371,13 @@ class TaskController extends GetxController {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         EasyLoading.showSuccess('Task Created');
-        fetchTasks();
-        fetchStats();
-        if (Get.isRegistered<HomeController>()) {
-          Get.find<HomeController>().fetchTodayOverview();
+        await Future.delayed(const Duration(milliseconds: 1500));
+        await fetchTasks();
+        await fetchStats();
+        try {
+          await Get.put(HomeController()).fetchTodayOverview();
+        } catch (e) {
+          print(e);
         }
       } else {
         final data = jsonDecode(response.body);

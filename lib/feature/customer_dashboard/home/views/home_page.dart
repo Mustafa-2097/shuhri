@@ -458,9 +458,9 @@ class HomePage extends StatelessWidget {
 
   String _getGreeting() {
     final hour = DateTime.now().hour;
-    if (hour < 12) return 'Good Morning';
-    if (hour < 17) return 'Good Afternoon';
-    return 'Good Evening';
+    if (hour < 12) return 'good_morning'.tr;
+    if (hour < 17) return 'good_afternoon'.tr;
+    return 'good_evening'.tr;
   }
 
   Widget _buildTaskItem({required int index, required TaskModel task}) {

@@ -21,7 +21,13 @@ class TaskAIParser {
     String locale = Get.locale?.languageCode ?? 'en';
 
     DateTime now = DateTime.now();
-    DateTime taskTime = DateTime(now.year, now.month, now.day, now.hour + 1, 0);
+    int defaultHour = now.hour + 1;
+    DateTime taskTime;
+    if (defaultHour >= 24) {
+      taskTime = DateTime(now.year, now.month, now.day, 23, 59);
+    } else {
+      taskTime = DateTime(now.year, now.month, now.day, defaultHour, 0);
+    }
 
     int duration = 60;
     String priority = "MEDIUM";

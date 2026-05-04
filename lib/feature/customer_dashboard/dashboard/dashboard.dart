@@ -6,6 +6,10 @@ import '../tasks/views/task_list_page.dart';
 import '../ai/views/ai_page.dart';
 import '../../profile/view/profile_page.dart';
 
+import '../home/controllers/home_controller.dart';
+import '../tasks/controllers/task_controller.dart';
+import 'package:get/get.dart';
+
 class CustomerDashboard extends StatefulWidget {
   final int initialIndex;
   const CustomerDashboard({super.key, this.initialIndex = 0});
@@ -34,6 +38,18 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
     setState(() {
       _selectedIndex = index;
     });
+    if (index == 0) {
+      if (Get.isRegistered<HomeController>()) {
+        Get.find<HomeController>().fetchTodayOverview();
+      }
+      if (Get.isRegistered<TaskController>()) {
+        Get.find<TaskController>().fetchTasks();
+      }
+    } else if (index == 1) {
+      if (Get.isRegistered<TaskController>()) {
+        Get.find<TaskController>().fetchTasks();
+      }
+    }
   }
 
   @override

@@ -140,6 +140,9 @@ class AppTranslations extends Translations {
       'day_optimized': 'Your day is optimized',
       'lets_plan_day': "Let's plan your day",
       'add_first_task': 'Add your first task to get started',
+      'good_morning': 'Good Morning',
+      'good_afternoon': 'Good Afternoon',
+      'good_evening': 'Good Evening',
     },
     'es_ES': {
       'profile': 'Perfil',
@@ -279,6 +282,9 @@ class AppTranslations extends Translations {
       'day_optimized': 'Tu día está optimizado',
       'lets_plan_day': 'Planifiquemos tu día',
       'add_first_task': 'Añade tu primera tarea para empezar',
+      'good_morning': 'Buenos días',
+      'good_afternoon': 'Buenas tardes',
+      'good_evening': 'Buenas noches',
     },
     'ar_SA': {
       'profile': 'الملف الشخصي',
@@ -417,6 +423,9 @@ class AppTranslations extends Translations {
       'day_optimized': 'يومك محسن',
       'lets_plan_day': 'لنخطط ليومك',
       'add_first_task': 'أضف مهمتك الأولى للبدء',
+      'good_morning': 'صباح الخير',
+      'good_afternoon': 'مساء الخير',
+      'good_evening': 'مساء الخير',
     },
     'de_DE': {
       'profile': 'Profil',
@@ -559,6 +568,9 @@ class AppTranslations extends Translations {
       'day_optimized': 'Ihr Tag ist optimiert',
       'lets_plan_day': 'Lassen Sie uns Ihren Tag planen',
       'add_first_task': 'Fügen Sie Ihre erste Aufgabe hinzu, um zu beginnen',
+      'good_morning': 'Guten Morgen',
+      'good_afternoon': 'Guten Tag',
+      'good_evening': 'Guten Abend',
     },
     'fr_FR': {
       'profile': 'Profil',
@@ -700,6 +712,9 @@ class AppTranslations extends Translations {
       'day_optimized': 'Votre journée est optimisée',
       'lets_plan_day': 'Planifions votre journée',
       'add_first_task': 'Ajoutez votre première tâche pour commencer',
+      'good_morning': 'Bon matin',
+      'good_afternoon': 'Bon après-midi',
+      'good_evening': 'Bonsoir',
     },
   };
 }
